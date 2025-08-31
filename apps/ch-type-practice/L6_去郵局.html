@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>聽打練習 - L6 去郵局</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/6ec3c90698.js" crossorigin="anonymous"></script>
+    <style>
+        .floating-block {
+            background: rgba(153, 205, 50, 0.99);
+            color: white;
+            width: 708px;
+            z-index: 100;
+            position: fixed;
+            top: 330px;
+            height: 50px;
+        }
+    </style>
+</head>
+
+<body class="container" style="margin: 10px;max-width: 1250px">
+    <div class="floating-block">
+    </div>
+    <div class="row">
+        <div class="col">
+            <div id='player'>
+                <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/6UZOPofLoAI?controls=0" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe> -->
+            </div>
+        </div>
+        <div class="col">
+            <div style="margin-top: 10px;" id='list-item'>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</body>
+
+<script>
+    var stoptime = 5;
+    // 2. This code loads the IFrame Player API code asynchronously.
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // 3. This function creates an <iframe> (and YouTube player)
+    //    after the API code downloads.
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+            height: '398',
+            width: '707',
+            videoId: 'KDpyswLITvk',
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+
+    // 4. The API will call this function when the video player is ready.
+    function onPlayerReady(event) {
+        event.target.seekTo(1);
+        //event.target.playVideo();
+    }
+
+    // 5. The API calls this function when the player's state changes.
+    //    The function indicates that when playing a video (state=1),
+    //    the player should play for six seconds and then stop.
+    var done = false;
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+            setTimeout(stopVideo, stoptime * 1000);
+            done = true;
+        }
+    }
+    function stopVideo() {
+        //player.stopVideo();
+        player.pauseVideo();
+    }
+
+    function seek(ss, stops) {
+        player.playVideo();
+        player.seekTo(ss);
+        setTimeout(stopVideo, stops * 1000);
+
+    }
+
+
+    var record = [
+    '0:05,0:08,這一封信是寫給家人的',
+'0:08,0:10,這一封信是寫給朋友的',
+'0:11,0:13,不知道郵局在哪裡',
+'0:21,0:22,沒想到在這裡碰見你',
+'0:23,0:24,是啊 你要去哪裡',
+'0:25,0:27,我要去買火車票',
+'0:26,0:28,那你呢',
+'0:28,0:29,你要去哪裡',
+'0:29,0:30,我要寄信',
+'0:31,0:33,請問附近有郵局嗎',
+'0:33,0:34,就在前面',
+'0:35,0:37,往前走五分鐘就到了',
+'0:37,0:39,謝謝',
+'0:39,0:41,這兩封信是要寄到美國嗎',
+'0:41,0:45,是啊不知道郵費要多少',
+'0:45,0:47,到郵局去問就知道了',
+'0:48,0:49,不客氣',
+'0:49,0:51,那我去郵局寄信囉',
+'0:59,1:02,我寫了信要給家人和朋友',
+'1:03,1:06,可是不知道郵費多少錢',
+'1:06,1:08,去郵局問就知道了',
+'1:13,1:15,想要知道怎麼寄信嗎',
+'1:26,1:28,請問這附近有郵局嗎',
+'1:29,1:30,在前面',
+'1:31,1:33,往前走五分鐘就到了',
+'1:34,1:38,謝謝 我要去郵局寄兩封信',
+'1:39,1:41,是給朋友的信嗎',
+'1:42,1:45,一封是寫給我父母親的',
+'1:45,1:48,另一封是寫給朋友的',
+'1:49,1:52,這兩封信都要寄到美國去嗎',
+'1:53,1:57,是啊 不知道郵費要多少',
+'1:57,2:00,到郵局一問 就知道了',
+'2:12,2:14,郵局',
+'2:16,2:18,附近',
+'2:20,2:22,前面',
+'2:25,2:27,前頭',
+'2:29,2:31,往',
+'2:33,2:35,走',
+'2:37,2:39,寄',
+'2:41,2:43,信',
+'2:46,2:47,父母親',
+'2:50,2:52,美國',
+'2:54,2:56,郵費',
+'3:01,3:03,這一杯是咖啡',
+'3:04,3:05,這一杯也是茶',
+'3:09,3:11,也表示兩個都一樣',
+'3:12,3:15,咖啡和茶是不一樣的東西',
+'3:17,3:21,這是一杯咖啡 另一杯是茶',
+'3:28,3:30,把兩件事分開說',
+'3:30,3:32,別人會聽的比較清楚',
+'3:33,3:34,這兩封信',
+'3:34,3:37,一封是寫給我父母親的',
+'3:37,3:39,另一封是寫給朋友的',
+'3:41,3:43,一封是寫給我父母親的',
+'3:44,3:47,另一封是寫給朋友的',
+'3:47,3:48,很棒',
+'3:48,3:50,那你自己試著說說看',
+'3:51,3:54,這一張是單程票',
+'3:54,3:56,另一張是來回票',
+'3:56,3:57,大家都學會',
+'4:05,4:09,直式信封和橫式信封的寫法',
+'4:09,4:12,這兩種信封的格式很不一樣哦',
+'4:12,4:14,橫式信封的寫法',
+'4:15,4:18,在台灣和寄到外國的航空信件',
+'4:19,4:20,也是非常不同',
+'4:21,4:24,最大差別是地址的順序',
+'4:25,4:27,台灣習慣是國名',
+'4:27,4:31,縣市鄉鎮路街名稱',
+'4:32,4:35,最後才是門牌號碼',
+'4:35,4:40,國外地址的書寫順序恰恰相反',
+'4:40,4:44,在台灣國內的橫式信封寫法',
+'4:44,4:48,寄信人的地址寫在左上角',
+'4:48,4:49,書寫的順序',
+'4:49,4:52,第一行郵遞區號',
+'4:52,4:55,第二行地址',
+'4:55,4:57,第三行姓名',
+'4:57,5:00,收信人的地址和名字',
+'5:00,5:01,寫在右下方',
+'5:01,5:04,郵票貼在右上角'
+    ];
+
+    function set_record() {
+
+        let my_target = document.getElementById('list-item');
+        for (let item of record) {
+            let tokens = item.split(',');
+            let s = get_time_sec(tokens[0]);
+            let e = get_time_sec(tokens[1]);
+            let diff = (e - s) < 3 ? 3 : (e - s);
+            //console.log( '===> '+ +' '+get_time_sec(tokens[1])) ;
+            //console.log(tokens) ;
+
+            ///////////////
+            let content = '<div class="form-group"><div class="form-row" style="margin-bottom: 5px;"><div class="col-1">' +
+                '<button type="button" class="btn btn-outline-info btn-sm" onclick="seek(' + s + ',' + diff + ');">' +
+                '<i class="fas fa-play"></i></button></div><div class="col-11"> <label>' + get_mask_str(tokens[2]) +
+                '</label></div></div><div class="form-row"><div class="col-10"><input type="text" class="form-control"></div>' +
+                '<div class="col-2"><button type="button" data-ans="' + tokens[2].replace(/\s/g, '') + '" class="btn btn-danger" onclick="check_ans(this);" ><i class="fas fa-check-circle"></i></button></div></div></div>';
+
+            my_target.innerHTML += content;
+
+        }
+    }
+    function get_time_sec(str) {
+        let ts = str.split(':');
+        return parseInt(ts[0]) * 60 + parseInt(ts[1]);
+    }
+    function get_mask_str(str) {
+        if (str.length > 5) {
+            return str.substr(0, 2) + '...' + str.substr(str.length - 2, str.length);
+        } else {
+            return str.substr(0, 2) + '...';
+        }
+    }
+    function check_ans(ans) {
+        var answer = ans.getAttribute('data-ans');
+        var result = ans.parentElement.previousElementSibling.children[0].value;
+        result = result.replace(/\s/g, '');
+        if (answer == result) {
+            let par = ans.parentElement.parentElement.parentElement;
+            par.style.display = "none";
+        } else {
+            ans.innerHTML = '<i class="fas fa-times"></i>';
+        }
+    }
+    set_record();
+</script>
+
+</html>

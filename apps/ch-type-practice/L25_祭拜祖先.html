@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>聽打練習 - L25 祭拜祖先</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/6ec3c90698.js" crossorigin="anonymous"></script>
+    <style>
+        .floating-block {
+            background: rgba(153, 205, 50, 0.99);
+            color: white;
+            width: 708px;
+            z-index: 100;
+            position: fixed;
+            top: 330px;
+            height: 50px;
+        }
+    </style>
+</head>
+
+<body class="container" style="margin: 10px;max-width: 1250px">
+    <div class="floating-block">
+    </div>
+    <div class="row">
+        <div class="col">
+            <div id='player'>
+                <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/6UZOPofLoAI?controls=0" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe> -->
+            </div>
+        </div>
+        <div class="col">
+            <div style="margin-top: 10px;" id='list-item'>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</body>
+
+<script>
+    var stoptime = 5;
+    // 2. This code loads the IFrame Player API code asynchronously.
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // 3. This function creates an <iframe> (and YouTube player)
+    //    after the API code downloads.
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+            height: '398',
+            width: '707',
+            videoId: '-wzTTOsxGm4',
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+
+    // 4. The API will call this function when the video player is ready.
+    function onPlayerReady(event) {
+        event.target.seekTo(1);
+        //event.target.playVideo();
+    }
+
+    // 5. The API calls this function when the player's state changes.
+    //    The function indicates that when playing a video (state=1),
+    //    the player should play for six seconds and then stop.
+    var done = false;
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+            setTimeout(stopVideo, stoptime * 1000);
+            done = true;
+        }
+    }
+    function stopVideo() {
+        //player.stopVideo();
+        player.pauseVideo();
+    }
+
+    function seek(ss, stops) {
+        player.playVideo();
+        player.seekTo(ss);
+        setTimeout(stopVideo, stops * 1000);
+
+    }
+
+
+    var record = [
+        '0:05,0:08,星期天一起去看電影好嗎',
+        '0:08,0:11,真不巧我要去掃墓',
+        '0:11,0:13,本來要找你去看電影的',
+        '0:14,0:15,只好改天了',
+        '0:16,0:18,我們華人都很尊敬祖先嗎',
+        '0:20,0:23,我們有濃厚的家庭倫理觀念',
+        '0:23,0:25,大家都非常重視',
+        '0:26,0:28,慎終追遠的傳統思想',
+        '0:29,0:30,一般人家裡',
+        '0:30,0:32,都供奉祖先牌位嗎',
+        '0:33,0:34,比較傳統的家庭',
+        '0:34,0:37,會在家庭供奉祖先的牌位',
+        '0:38,0:41,大概什麼時候要祭拜祖先呢',
+        '0:41,0:44,每個家庭的習慣不一樣',
+        '0:44,0:49,但是通常過年過節時一定會祭祖',
+        '0:49,0:51,祭祖時要燒香嗎',
+        '0:52,0:54,是啊我們會燒香',
+        '0:54,0:58,祈求祖先保佑子孫平安幸福',
+        '1:04,1:08,我們這一課要教的課文跟祭祖有關喔',
+        '1:20,1:23,華人都很尊敬祖先嗎',
+        '1:23,1:26,我們有濃厚的家庭倫理',
+        '1:26,1:30,重視慎終追遠的傳統思想',
+        '1:31,1:34,一般人家裡都供奉祖先牌位嗎',
+        '1:35,1:37,重視傳統的家庭',
+        '1:37,1:40,會在家裡供奉祖先的牌位',
+        '1:41,1:44,大概什麼時候要祭拜祖先呢',
+        '1:45,1:48,每個家庭的習慣不一樣',
+        '1:48,1:52,但是通常過年過節時一定會祭祖',
+        '1:53,1:56,祭祖時要燒香祝禱嗎',
+        '1:58,2:00,是的 燒香祝禱',
+        '2:00,2:04,祈求祖先保祐子孫平安幸福',
+        '2:06,2:08,現在一起來看看',
+        '2:21,2:22,祭拜祖先',
+        '2:24,2:26,祖先',
+        '2:28,2:30,家庭倫理',
+        '2:32,2:34,思想',
+        '2:36,2:37,一般',
+        '2:40,2:41,供奉',
+        '2:44,2:46,慎終追遠',
+        '2:48,2:50,祖先牌位',
+        '2:52,2:54,通常',
+        '2:56,2:57,燒香',
+        '3:00,3:02,祝禱',
+        '3:04,3:05,子孫',
+        '3:08,3:09,幸福',
+        '3:15,3:20,很多人都會把通常和常常搞混了',
+        '3:20,3:23,他們有什麼不同呢',
+        '3:29,3:33,我們會用常常來形容次數很多',
+        '3:33,3:36,不太懂耶你可以舉個例子嗎',
+        '3:36,3:38,他常常喝酒',
+        '3:38,3:40,他常常喝酒',
+        '3:40,3:42,他常常去看電影',
+        '3:43,3:45,他常常去看電影',
+        '3:45,3:49,可是通常的句子要怎麼用呢',
+        '4:04,4:06,我通常七點起床',
+        '4:07,4:09,我通常七點起床',
+        '4:10,4:12,他通常晚飯後散步',
+        '4:12,4:15,條件就是晚飯後',
+        '4:15,4:18,他通常晚飯後散步',
+        '4:18,4:22,他通常考完試會去看電影',
+        '4:22,4:26,他通常考完試會去看電影',
+        '4:26,4:27,我要去運動了',
+        '4:28,4:30,可是你還沒做功課',
+        '4:30,4:33,我通常上完文法課',
+        '4:33,4:34,就會去運動',
+        '4:35,4:37,你真的馬上學馬上用',
+        '4:38,4:40,這叫做學以致用',
+        '4:40,4:43,我學會了你一定也可以的'
+    ];
+
+    function set_record() {
+
+        let my_target = document.getElementById('list-item');
+        for (let item of record) {
+            let tokens = item.split(',');
+            let s = get_time_sec(tokens[0]);
+            let e = get_time_sec(tokens[1]);
+            let diff = (e - s) < 3 ? 3 : (e - s);
+            //console.log( '===> '+ +' '+get_time_sec(tokens[1])) ;
+            //console.log(tokens) ;
+
+            ///////////////
+            let content = '<div class="form-group"><div class="form-row" style="margin-bottom: 5px;"><div class="col-1">' +
+                '<button type="button" class="btn btn-outline-info btn-sm" onclick="seek(' + s + ',' + diff + ');">' +
+                '<i class="fas fa-play"></i></button></div><div class="col-11"> <label>' + get_mask_str(tokens[2]) +
+                '</label></div></div><div class="form-row"><div class="col-10"><input type="text" class="form-control"></div>' +
+                '<div class="col-2"><button type="button" data-ans="' + tokens[2].replace(/\s/g, '') + '" class="btn btn-danger" onclick="check_ans(this);" ><i class="fas fa-check-circle"></i></button></div></div></div>';
+
+            my_target.innerHTML += content;
+
+        }
+    }
+    function get_time_sec(str) {
+        let ts = str.split(':');
+        return parseInt(ts[0]) * 60 + parseInt(ts[1]);
+    }
+    function get_mask_str(str) {
+        if (str.length > 5) {
+            return str.substr(0, 2) + '...' + str.substr(str.length - 2, str.length);
+        } else {
+            return str.substr(0, 2) + '...';
+        }
+    }
+    function check_ans(ans) {
+        var answer = ans.getAttribute('data-ans');
+        var result = ans.parentElement.previousElementSibling.children[0].value;
+        result = result.replace(/\s/g, '');
+        if (answer == result) {
+            let par = ans.parentElement.parentElement.parentElement;
+            par.style.display = "none";
+        } else {
+            ans.innerHTML = '<i class="fas fa-times"></i>';
+        }
+    }
+    set_record();
+</script>
+
+</html>

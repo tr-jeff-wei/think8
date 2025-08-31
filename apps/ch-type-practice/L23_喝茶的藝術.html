@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>聽打練習 - L23 喝茶的藝術</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/6ec3c90698.js" crossorigin="anonymous"></script>
+    <style>
+        .floating-block {
+            background: rgba(153, 205, 50, 0.99);
+            color: white;
+            width: 708px;
+            z-index: 100;
+            position: fixed;
+            top: 330px;
+            height: 50px;
+        }
+    </style>
+</head>
+
+<body class="container" style="margin: 10px;max-width: 1250px">
+    <div class="floating-block">
+    </div>
+    <div class="row">
+        <div class="col">
+            <div id='player'>
+                <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/6UZOPofLoAI?controls=0" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe> -->
+            </div>
+        </div>
+        <div class="col">
+            <div style="margin-top: 10px;" id='list-item'>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</body>
+
+<script>
+    var stoptime = 5;
+    // 2. This code loads the IFrame Player API code asynchronously.
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // 3. This function creates an <iframe> (and YouTube player)
+    //    after the API code downloads.
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+            height: '398',
+            width: '707',
+            videoId: 'J9yCaUg_FNs',
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+
+    // 4. The API will call this function when the video player is ready.
+    function onPlayerReady(event) {
+        event.target.seekTo(1);
+        //event.target.playVideo();
+    }
+
+    // 5. The API calls this function when the player's state changes.
+    //    The function indicates that when playing a video (state=1),
+    //    the player should play for six seconds and then stop.
+    var done = false;
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+            setTimeout(stopVideo, stoptime * 1000);
+            done = true;
+        }
+    }
+    function stopVideo() {
+        //player.stopVideo();
+        player.pauseVideo();
+    }
+
+    function seek(ss, stops) {
+        player.playVideo();
+        player.seekTo(ss);
+        setTimeout(stopVideo, stops * 1000);
+
+    }
+
+
+    var record = [
+    '0:07,0:09,好香喔',
+'0:11,0:13,真好喝',
+'0:13,0:15,你喜歡喝我泡的茶嗎',
+'0:16,0:17,當然',
+'0:18,0:20,你的茶具好講究',
+'0:20,0:21,愛喝茶的人',
+'0:21,0:22,都很重視',
+'0:23,0:26,茶具茶葉和泡茶的方法',
+'0:26,0:30,這些茶壼茶碗又精緻又可愛',
+'0:30,0:33,他們是我從不同的地方買來的',
+'0:33,0:35,有一些是朋友送我的',
+'0:36,0:38,趕快收回去免得打破了',
+'0:39,0:41,你嚐嚐這壼龍井的味道',
+'0:45,0:47,味道很清香',
+'0:47,0:49,中國茶大概有多少種',
+'0:49,0:51,種類太多了',
+'0:51,0:56,比較常喝的有烏龍香片和普洱茶',
+'0:56,0:58,今天趁著這個機會',
+'0:58,1:00,跟你學學喝茶的藝術',
+'1:00,1:03,只要有空歡迎你來我家泡茶',
+'1:05,1:08,又在泡茶呀真悠閒',
+'1:08,1:09,我的工作做完了',
+'1:09,1:11,可以享受一下呀',
+'1:12,1:15,中國人喝茶的歷史有多久了',
+'1:15,1:18,大概從唐朝起',
+'1:18,1:21,茶就是一般人日常的飲料了',
+'1:21,1:25,為什麼茶會成為華人傳統的飲料呢',
+'1:26,1:29,大概跟喝茶有益身體健康有關吧',
+'1:30,1:34,現在人們還是按照傳統的方式泡茶嗎',
+'1:34,1:36,為了適應現代生活',
+'1:37,1:38,泡茶的方式',
+'1:38,1:39,改變了不少',
+'1:39,1:41,一切都講求',
+'1:41,1:42,快速簡單',
+'1:42,1:45,現在還有各種茶類飲料',
+'1:45,1:49,還有冷的和熱的可以選擇',
+'1:49,1:52,你喜歡用哪一種方式泡茶呢',
+'1:52,1:56,我還是喜歡用傳統的方式泡茶',
+'1:57,1:59,不管用哪一種方式泡茶',
+'1:59,2:01,還是你泡得最好喝',
+'2:02,2:04,真會說話',
+'2:07,2:09,喝吧謝謝',
+'2:14,2:17,中國人最喜歡請朋友喝茶',
+'2:17,2:19,和朋友一起泡茶',
+'2:19,2:21,有哪些詞一定要學的',
+'2:33,2:37,我正好泡了茶 一起來嚐嚐',
+'2:38,2:40,你的茶具好講究',
+'2:41,2:44,愛喝茶的人都很重視',
+'2:44,2:47,茶具 茶葉和泡茶的方法',
+'2:48,2:53,這些茶壺 茶碗又精緻又可愛',
+'2:53,2:57,你嚐嚐這壺龍井的味道',
+'2:59,3:01,味道很清香',
+'3:02,3:04,中國茶大概有多少種',
+'3:05,3:09,種類太多了 比較常喝的有',
+'3:10,3:12,烏龍 香片和普洱茶',
+'3:13,3:16,今天趁著這個機會',
+'3:16,3:19,跟你學學喝茶的藝術',
+'3:20,3:24,中國人喝茶的歷史有多久了',
+'3:25,3:27,大概從唐朝起',
+'3:27,3:31,茶就是一般人日常的飲料了',
+'3:32,3:33,為什麼',
+'3:33,3:37,茶會成為華人傳統的飲料呢',
+'3:38,3:42,大概跟喝茶有益身體健康有關吧',
+'3:43,3:44,現在',
+'3:44,3:48,人們還是按照傳統的方式泡茶嗎',
+'3:48,3:51,為了適應現代生活',
+'3:51,3:54,泡茶的方式改變了不少',
+'3:54,3:57,一切都講求快速簡單',
+'3:58,4:02,妳喜歡用哪一種方式泡茶呢',
+'4:02,4:06,我喜歡用傳統的方式來泡茶',
+'4:08,4:12,按下來我們看看談到喝茶的藝術',
+'4:12,4:14,會用到哪些生詞',
+'4:26,4:28,泡茶',
+'4:30,4:31,茶具',
+'4:33,4:34,講究',
+'4:36,4:37,茶葉',
+'4:40,4:41,茶壺',
+'4:43,4:44,茶碗',
+'4:46,4:47,精緻',
+'4:49,4:50,龍井',
+'4:52,4:53,烏龍',
+'4:55,4:56,香片',
+'4:59,5:00,普洱茶',
+'5:02,5:04,趁著',
+'5:07,5:07,大概',
+'5:09,5:10,唐朝',
+'5:13,5:14,日常',
+'5:17,5:18,傳統',
+'5:20,5:22,適應',
+'5:25,5:27,跟 有關',
+'5:31,5:32,現代生活',
+'5:34,5:36,改變',
+'5:38,5:39,講求',
+'5:41,5:42,快速',
+'5:44,5:46,簡單',
+'5:52,5:53,你要去哪裡',
+'5:54,5:57,今天天氣很好我要去公園賞花',
+'5:57,5:59,別急著走',
+'5:59,6:00,你可以說',
+'6:00,6:02,趁著 今天天氣很好',
+'6:02,6:04,我要去公園賞花',
+'6:05,6:08,加了趁著有什麼差別呢',
+'6:09,6:12,趁著表示趁機利用機會',
+'6:12,6:14,帶有把握機會的意思',
+'6:14,6:19,趁著今天天氣好 我們去游泳吧',
+'6:19,6:21,不錯還有呢',
+'6:21,6:24,趁著今天不上課',
+'6:24,6:26,我們正好去逛街',
+'6:26,6:30,我聽出來了你想偷懶不想上課',
+'6:30,6:31,對不對',
+'6:31,6:32,又被你猜對了',
+'6:32,6:34,不然我們先上課',
+'6:35,6:37,再去看國劇演出',
+'6:37,6:38,這還差不多',
+'6:38,6:41,這一課有兩種句型很象',
+'6:42,6:43,我正想教你',
+'7:03,7:07,我正好泡了茶 一起來嚐嚐',
+'7:07,7:09,很好',
+'7:09,7:10,就是課文裡的那一句',
+'7:11,7:13,來個正怎麼棒的句子吧',
+'7:14,7:16,我正要去老師家',
+'7:16,7:18,正好在路上遇見她',
+'7:19,7:20,非常好',
+'7:20,7:22,他正要休息',
+'7:22,7:25,電話正好響起來',
+'7:26,7:27,你怎麼了',
+'7:28,7:29,沒什麼',
+'7:29,7:32,心情不好跟我有關係嗎',
+'7:32,7:34,我沒有我跟著你啊',
+'7:35,7:37,我不是說你跟著我',
+'7:38,7:40,是跟什麼有關的意思',
+'7:42,7:44,跟你沒有關係啦',
+'7:44,7:47,但是跟昨天的期末考有關係',
+'7:48,7:50,那麼是昨天考得不好',
+'7:52,7:53,非常不好',
+'7:53,7:54,一定不及格',
+'7:55,7:58,跟你考試前去逛街有關係嗎',
+'7:58,8:02,有就是因為沒有好好念書',
+'8:03,8:06,我相信下次一定會及格',
+'8:06,8:11,所以把兩個名詞或兩句話連在一起',
+'8:11,8:13,就可以用跟',
+'8:14,8:19,例如你不想上學跟那位老師有關嗎',
+'8:20,8:21,你可以改成什麼呢',
+'8:22,8:23,我不想上學',
+'8:24,8:26,跟那位老師沒有關係',
+'8:26,8:27,對嗎',
+'8:27,8:30,別難過了你很聽明',
+'8:30,8:32,下次好好念書就行啦',
+'8:33,8:35,也許吧希望是這樣',
+'8:36,8:38,應該說大概吧',
+'8:39,8:42,也許和大概不是一樣的嗎',
+'8:43,8:44,不一樣呢',
+'8:44,8:47,大概表一示推測估計',
+'8:47,8:49,也許肯定意味較重',
+'8:50,8:55,也許側重於猜測不確定的意味較重',
+'8:56,8:57,我今天才知道',
+'8:57,8:59,原來大概比較肯定',
+'9:00,9:02,也許比較不確定耶',
+'9:02,9:07,這就是為什麼你需要一位老師的原因',
+'9:07,9:10,我大概需要一位好老師',
+'9:10,9:12,來教教我中文才行'
+    ]    
+];
+
+    function set_record() {
+
+        let my_target = document.getElementById('list-item');
+        for (let item of record) {
+            let tokens = item.split(',');
+            let s = get_time_sec(tokens[0]);
+            let e = get_time_sec(tokens[1]);
+            let diff = (e - s) < 3 ? 3 : (e - s);
+            //console.log( '===> '+ +' '+get_time_sec(tokens[1])) ;
+            //console.log(tokens) ;
+
+            ///////////////
+            let content = '<div class="form-group"><div class="form-row" style="margin-bottom: 5px;"><div class="col-1">' +
+                '<button type="button" class="btn btn-outline-info btn-sm" onclick="seek(' + s + ',' + diff + ');">' +
+                '<i class="fas fa-play"></i></button></div><div class="col-11"> <label>' + get_mask_str(tokens[2]) +
+                '</label></div></div><div class="form-row"><div class="col-10"><input type="text" class="form-control"></div>' +
+                '<div class="col-2"><button type="button" data-ans="' + tokens[2].replace(/\s/g, '') + '" class="btn btn-danger" onclick="check_ans(this);" ><i class="fas fa-check-circle"></i></button></div></div></div>';
+
+            my_target.innerHTML += content;
+
+        }
+    }
+    function get_time_sec(str) {
+        let ts = str.split(':');
+        return parseInt(ts[0]) * 60 + parseInt(ts[1]);
+    }
+    function get_mask_str(str) {
+        if (str.length > 5) {
+            return str.substr(0, 2) + '...' + str.substr(str.length - 2, str.length);
+        } else {
+            return str.substr(0, 2) + '...';
+        }
+    }
+    function check_ans(ans) {
+        var answer = ans.getAttribute('data-ans');
+        var result = ans.parentElement.previousElementSibling.children[0].value;
+        result = result.replace(/\s/g, '');
+        if (answer == result) {
+            let par = ans.parentElement.parentElement.parentElement;
+            par.style.display = "none";
+        } else {
+            ans.innerHTML = '<i class="fas fa-times"></i>';
+        }
+    }
+    set_record();
+</script>
+
+</html>

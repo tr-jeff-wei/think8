@@ -1,0 +1,213 @@
+<!Doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha2/katex.min.css" integrity="sha384-exe4Ak6B0EoJI0ogGxjJ8rn+RN3ftPnEQrGwX59KTCl5ybGzvHGKjhPKk/KC3abb" crossorigin="anonymous">
+        <style>
+            table{
+                font-size: 20px;
+            }
+            tr{
+            	height: 120px ;
+            }
+            input{
+            	max-width: 30px;
+                text-align: center;
+            }
+            b{
+                color: blue ;
+            }
+            .katex { font-size: 2em; }
+            .answer{
+                visibility: hidden;
+                text-align: left;
+                color: blue;
+            }
+        </style>
+    </head>
+    <body>
+        <table>        	
+            <thead>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </thead>
+            <tbody id="data">
+                
+                <tr>
+                    <td colspan="3"><h3>練習題-兩點求直線</h3></td>
+                    <td><button style="height: 50px;width: 100px;" onclick="check();">檢視答案</button></td>
+                </tr>
+                
+               
+            </tbody>        	
+        </table>
+       
+    </body>
+    <script src="lib/algebra-0.2.6.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha2/katex.min.js" integrity="sha384-OMvkZ24ANLwviZR2lVq8ujbE/bUO8IR1FdBrKLQBI14Gq5Xp/lksIccGkmKL8m+h" crossorigin="anonymous"></script>
+    
+    <script>
+        
+        
+        var Fraction = algebra.Fraction;
+        var Expression = algebra.Expression;
+        var Equation = algebra.Equation;        
+        
+        var no = 1 ;        
+        
+        function eq_type1_prepare( target , n ){
+            
+            for(var i=1 ; i<=n ; i++){
+
+                target.innerHTML = target.innerHTML 
+                    +"<tr><td> ("+i+") </td>"
+                    +"<td id='q"+i+"' style='width: 300px;text-align: left;'></td>"
+                    +"<td></td>"
+                    +"<td id='qa"+i+"' class='answer'</td>"
+                    +"<td id='qaa"+i+"' class='answer'</td>"
+                    +"</tr>" ;                   
+                
+            }
+            
+            
+        }
+        function eq_type1(n ){
+            
+            for(var i=1 ; i<=n ; i++){
+                var q  = document.getElementById('q'+i);
+                var qa = document.getElementById('qa'+i);
+                var qaa = document.getElementById('qaa'+i);
+                eq(q,qa,qaa) ;           
+                
+            }
+            
+            
+        }        
+        
+        
+        function eq( target , target_answer , target_answer2){
+            
+            var r = Math.random() ;
+            
+            eq1( target , target_answer , target_answer2 ) ;   
+            
+                
+        }
+        
+        
+        function eq1( target , target_answer , target_answer2){
+
+            var p1_x = genNumber(7,true) ;
+            var p1_y = genNumber(7,true) ;
+            
+            var p2_x = genNumber(7,true) ;
+            var p2_y = genNumber(7,true) ;            
+            
+            var render_context =
+                'P1（'+p1_x+' , '+p1_y+'）、P2（'+p2_x+' , '+p2_y+'）' ;
+                      
+            target.textContent = render_context ;
+            
+            // return [m,a,b] <-- ay=mx+b
+            var cs = get_equation_coefficient( p1_x , p1_y , p2_x , p2_y) ;
+            var x , y , m , eq ;
+            if( cs[1]==1 ){
+                x = new Expression("x") ;
+                y = new Expression("y") ;
+                x = x.multiply(cs[0]).add(cs[2]) ;
+                eq = new Equation( y , x ) ;
+                render_context =algebra.toTex(eq) ;
+                katex.render( render_context , target_answer);
+            }else{ // vertical line
+                x = new Expression("x") ;
+                b = cs[2].multiply(-1) ; 
+                eq = new Equation( x , b ) ;
+                render_context =algebra.toTex(eq) ;
+                katex.render( render_context , target_answer);
+            }
+            
+        }
+        
+        // return [m,a,b] <-- ay=mx+b
+        function get_equation_coefficient( p1x , p1y , p2x , p2y ){
+            var b = null ;
+            var m = get_slope(p1x , p1y , p2x , p2y) ;
+            if( m == null ){ // vertical line
+                b = p1x*(-1) ;
+                return [ new Fraction(1,1),0,new Fraction(b,1)] ;
+            }else{
+                b = m.multiply(p1x).multiply(-1).add(p1y) ;
+                return [m,1,b];                
+            }
+        }
+                
+        
+        function get_slope( p1x , p1y , p2x , p2y ){
+            if( p1x == p2x){
+                return null ;
+            }
+            return new Fraction( (p2y-p1y),(p2x-p1x) ) ;
+        }
+        
+        
+        function genNumber( top , negative ){
+
+        	var n = Math.floor(Math.random()*top)+2;
+        	if( negative ){
+                if( Math.random() > 0.5 ){
+                    return n ;
+                }else{
+                    return n*(-1) ;
+                }
+            }else{
+                return n ;
+            }
+        }
+
+        function genPolar(){
+            return Math.random()>0.5?1:-1;
+        }
+        
+        function lcm_two_numbers(x, y) {
+           if ((typeof x !== 'number') || (typeof y !== 'number')) 
+            return false;
+          return (!x || !y) ? 0 : Math.abs((x * y) / gcd_two_numbers(x, y));
+        }
+
+        function gcd_two_numbers(x, y) {
+          x = Math.abs(x);
+          y = Math.abs(y);
+          while(y) {
+            var t = y;
+            y = x % y;
+            x = t;
+          }
+          return x;
+        }        
+        
+        
+        function check(){
+        
+            var input = prompt("準備好看答案了嗎？ 是的話請輸入 y") ;
+	       if( input=='y'){
+               var its = document.getElementsByClassName('answer') ;
+               for( var i=0 ; i<its.length ; i++){
+                   its[i].style.visibility = "visible"; 
+               }
+           }
+
+
+        }
+        
+        var e = document.getElementById("data") ;
+        eq_type1_prepare(e , 6) ;
+        eq_type1(6) ;
+        //-----------------------------------------
+        
+        
+  
+        
+    </script>
+</html>

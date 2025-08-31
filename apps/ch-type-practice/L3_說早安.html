@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>聽打練習 - L3_說早安</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/6ec3c90698.js" crossorigin="anonymous"></script>
+    <style>
+        .floating-block {
+            background: rgba(153, 205, 50, 0.99);
+            color: white;
+            width: 708px;
+            z-index: 100;
+            position: fixed;
+            top: 330px;
+            height: 50px;
+        }
+    </style>
+</head>
+
+<body class="container" style="margin: 10px;max-width: 1250px">
+    <div class="floating-block">
+    </div>
+    <div class="row">
+        <div class="col">
+            <div id='player'>
+                <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/6UZOPofLoAI?controls=0" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe> -->
+            </div>
+        </div>
+        <div class="col">
+            <div style="margin-top: 10px;" id='list-item'>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</body>
+
+<script>
+    var stoptime = 5;
+    // 2. This code loads the IFrame Player API code asynchronously.
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // 3. This function creates an <iframe> (and YouTube player)
+    //    after the API code downloads.
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+            height: '398',
+            width: '707',
+            videoId: 'vWZXWauAmIw',
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+
+    // 4. The API will call this function when the video player is ready.
+    function onPlayerReady(event) {
+        event.target.seekTo(1);
+        //event.target.playVideo();
+    }
+
+    // 5. The API calls this function when the player's state changes.
+    //    The function indicates that when playing a video (state=1),
+    //    the player should play for six seconds and then stop.
+    var done = false;
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+            setTimeout(stopVideo, stoptime * 1000);
+            done = true;
+        }
+    }
+    function stopVideo() {
+        //player.stopVideo();
+        player.pauseVideo();
+    }
+
+    function seek(ss, stops) {
+        player.playVideo();
+        player.seekTo(ss);
+        setTimeout(stopVideo, stops * 1000);
+
+    }
+
+
+    var record = ['0:22,0:23,早安李小姐',
+'0:23,0:25,你也來運動啊',
+'0:25,0:27,是啊運動對身體很好',
+'0:28,0:29,對了 丁小姐好嗎',
+'0:29,0:30,她很好',
+'0:31,0:32,明天帶她一起來運動',
+'0:33,0:36,明天見 明天見',
+'0:47,0:48,早安',
+'0:49,0:51,早上看到朋友要說早安',
+'0:53,0:55,還可以說什麼呢',
+'1:05,1:08,方先生 您早',
+'1:10,1:12,早安 王先生',
+'1:13,1:15,您今天好嗎',
+'1:17,1:19,我很好',
+'1:20,1:22,方太太好嗎',
+'1:24,1:26,她很好 謝謝您',
+'1:27,1:30,您一切都習慣了嗎',
+'1:31,1:34,都習慣了 謝謝',
+'1:35,1:37,您要上哪兒去呢',
+'1:39,1:42,我要去公園運動',
+'1:45,1:49,多聽多說一定可以學好華語的',
+'1:49,1:51,接著看看今天的生詞',
+'2:00,2:01,早安',
+'2:04,2:05,今天',
+'2:08,2:09,很',
+'2:12,2:14,太太',
+'2:17,2:18,謝謝',
+'2:21,2:22,一切',
+'2:25,2:27,都',
+'2:29,2:31,習慣',
+'2:34,2:36,公園',
+'2:38,2:40,運動',
+'2:47,2:49,你要去哪',
+'2:57,3:01,你可以說我要去台北',
+'3:01,3:04,我要去台北',
+'3:06,3:10,也可以說我要上台北去',
+'3:10,3:13,我要上台北去',
+'3:13,3:14,懂了嗎',
+'3:17,3:19,是什麼意思啊',
+'3:19,3:22,是嗎不是媽媽的媽',
+'3:26,3:28,方太太好嗎',
+'3:28,3:30,這時候就要回答',
+'3:30,3:32,我很好懂了嗎',
+'3:37,3:39,學會了嗎',
+'3:46,3:50,早上我們看到朋友時會說早安',
+'3:50,3:51,或是您早',
+'3:58,4:01,中午的時候我們可以說午安',
+'4:06,4:09,到了晚上可以說晚安',
+'4:11,4:14,早安午安和晚安',
+'4:14,4:16,生活上常用得到',
+'4:16,4:18,所以一定要學會喔'
+    ];
+
+    function set_record() {
+
+        let my_target = document.getElementById('list-item');
+        for (let item of record) {
+            let tokens = item.split(',');
+            let s = get_time_sec(tokens[0]);
+            let e = get_time_sec(tokens[1]);
+            let diff = (e - s) < 3 ? 3 : (e - s);
+            //console.log( '===> '+ +' '+get_time_sec(tokens[1])) ;
+            //console.log(tokens) ;
+
+            ///////////////
+            let content = '<div class="form-group"><div class="form-row" style="margin-bottom: 5px;"><div class="col-1">' +
+                '<button type="button" class="btn btn-outline-info btn-sm" onclick="seek(' + s + ',' + diff + ');">' +
+                '<i class="fas fa-play"></i></button></div><div class="col-11"> <label>' + get_mask_str(tokens[2]) +
+                '</label></div></div><div class="form-row"><div class="col-10"><input type="text" class="form-control"></div>' +
+                '<div class="col-2"><button type="button" data-ans="' + tokens[2].replace(/\s/g, '') + '" class="btn btn-danger" onclick="check_ans(this);" ><i class="fas fa-check-circle"></i></button></div></div></div>';
+
+            my_target.innerHTML += content;
+
+        }
+    }
+    function get_time_sec(str) {
+        let ts = str.split(':');
+        return parseInt(ts[0]) * 60 + parseInt(ts[1]);
+    }
+    function get_mask_str(str) {
+        if (str.length > 5) {
+            return str.substr(0, 2) + '...' + str.substr(str.length - 2, str.length);
+        } else {
+            return str.substr(0, 2) + '...';
+        }
+    }
+    function check_ans(ans) {
+        var answer = ans.getAttribute('data-ans');
+        var result = ans.parentElement.previousElementSibling.children[0].value;
+        result = result.replace(/\s/g, '');
+        if (answer == result) {
+            let par = ans.parentElement.parentElement.parentElement;
+            par.style.display = "none";
+        } else {
+            ans.innerHTML = '<i class="fas fa-times"></i>';
+        }
+    }
+    set_record();
+</script>
+
+</html>

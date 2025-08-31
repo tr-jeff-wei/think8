@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>聽打練習 - 助人與尊重</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/6ec3c90698.js" crossorigin="anonymous"></script>
+    <style>
+        .floating-block {
+            background: rgba(153, 205, 50, 0.99);
+            color: white;
+            width: 708px;
+            z-index: 100;
+            position: fixed;
+            top: 330px;
+            height: 50px;
+        }
+     
+    </style>
+</head>
+
+<body class="container" style="margin: 10px;max-width: 1250px">
+    <div class="floating-block">
+    </div>
+    <div class="row">
+        <div class="col">
+            <div id='player'>
+                <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/6UZOPofLoAI?controls=0" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe> -->
+            </div>
+        </div>
+        <div class="col">
+            <div style="margin-top: 10px;" id='list-item'>
+                
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</body>
+
+<script>
+    var stoptime = 5;
+    // 2. This code loads the IFrame Player API code asynchronously.
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // 3. This function creates an <iframe> (and YouTube player)
+    //    after the API code downloads.
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+            height: '398',
+            width: '707',
+            videoId: 'NJy4dQxPB24',
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+
+    // 4. The API will call this function when the video player is ready.
+    function onPlayerReady(event) {
+        event.target.seekTo(1);
+        //event.target.playVideo();
+    }
+
+    // 5. The API calls this function when the player's state changes.
+    //    The function indicates that when playing a video (state=1),
+    //    the player should play for six seconds and then stop.
+    var done = false;
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+            setTimeout(stopVideo, stoptime * 1000);
+            done = true;
+        }
+    }
+    function stopVideo() {
+        //player.stopVideo();
+        player.pauseVideo();
+    }
+
+    function seek(ss, stops) {
+        player.playVideo();
+        player.seekTo(ss);
+        setTimeout(stopVideo, stops * 1000);
+
+    }
+
+
+    var record = [        
+    '0:08,0:10,今天的大掃除',
+'0:10,0:11,除了清掃環境',
+'0:12,0:13,還要把自己不要的',
+'0:13,0:15,冬季舊衣服通通清出來',
+'0:15,0:18,不然衣櫥櫃子都快要放不下了',
+'0:19,0:21,好 沒問題',
+'0:29,0:30,好乾淨喔',
+'0:30,0:32,簡直就像新家一樣',
+'0:32,0:33,辛苦了一整天',
+'0:33,0:35,汗水總算沒有白流',
+'0:36,0:37,乾淨是乾淨啊',
+'0:37,0:40,可是 那一堆東西怎麼辦',
+'0:43,0:46,哇 這些都是清出來不要的嗎',
+'0:46,0:48,怎麼有這麼多東西啊',
+'0:48,0:49,別擔心',
+'0:49,0:52,我知道有人在募集物資',
+'0:52,0:53,要送到非洲',
+'0:53,0:55,我們可以把這些拿去捐啊',
+'0:56,0:59,對耶 清舊衣又可以做好事',
+'0:59,1:02,真是一舉兩得',
+'1:02,1:05,太好了 就這麼決定了',
+'1:08,1:08,美麗',
+'1:09,1:12,今天妳找我吃冰 有什麼事嗎',
+'1:13,1:16,嗯 我是有點事情想請你幫忙',
+'1:16,1:19,我常去作義工的愛心基金會',
+'1:19,1:22,正在募集物資要送去非洲',
+'1:22,1:24,但是東西實在是太多了',
+'1:25,1:27,需要人手幫忙整理',
+'1:28,1:30,沒問題 這麼有意義的事',
+'1:30,1:31,我一定會去幫忙',
+'1:32,1:33,太好了',
+'1:38,1:40,哇 這麼多物資',
+'1:40,1:42,大家真的好有愛心喔',
+'1:43,1:44,有愛心是一回事',
+'1:45,1:47,但是在做愛心的同時',
+'1:47,1:49,是否懂得尊重',
+'1:49,1:51,這又是另一回事了',
+'1:52,1:55,尊重 什麼意思啊',
+'1:56,1:57,等一下開始整理',
+'1:57,2:00,你就會明白了',
+'2:03,2:05,哇 這麼誇張的衣服'
+
+    ];
+
+    function set_record() {
+
+        let my_target = document.getElementById('list-item') ;
+        for (let item of record) {
+            let tokens = item.split(',');
+            let s = get_time_sec(tokens[0]) ;
+            let e = get_time_sec(tokens[1]) ;
+            let diff = (e-s)<3?3:(e-s) ;
+            //console.log( '===> '+ +' '+get_time_sec(tokens[1])) ;
+            //console.log(tokens) ;
+
+            ///////////////
+            let content = '<div class="form-group"><div class="form-row" style="margin-bottom: 5px;"><div class="col-1">'+
+            '<button type="button" class="btn btn-outline-info btn-sm" onclick="seek('+s+','+diff+');">'+
+            '<i class="fas fa-play"></i></button></div><div class="col-11"> <label>'+get_mask_str(tokens[2])+
+            '</label></div></div><div class="form-row"><div class="col-10"><input type="text" class="form-control"></div>'+
+            '<div class="col-2"><button type="button" data-ans="' + tokens[2].replace(/\s/g, '') + '" class="btn btn-danger" onclick="check_ans(this);" ><i class="fas fa-check-circle"></i></button></div></div></div>';
+
+            my_target.innerHTML += content ;
+
+        }
+    }
+    function get_time_sec( str ){
+        let ts = str.split(':') ;        
+        return parseInt(ts[0])*60+parseInt(ts[1]) ;
+    }
+    function get_mask_str( str ){
+        if( str.length >5 ){
+            return str.substr(0,2)+'...'+str.substr( str.length-2 , str.length) ;
+        }else{
+            return str.substr(0,2)+'...';
+        }
+    }
+    function check_ans( ans ){
+            var answer = ans.getAttribute('data-ans');
+			var result = ans.parentElement.previousElementSibling.children[0].value ;
+            result = result.replace(/\s/g, '') ;
+            if( answer == result ){
+                let par = ans.parentElement.parentElement.parentElement;
+                par.style.display = "none";
+            }else{
+                ans.innerHTML = '<i class="fas fa-times"></i>' ;
+            }
+    }
+    set_record();
+</script>
+
+</html>

@@ -1,0 +1,2380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Top Term - Practice</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="css/clean-blog.min.css" rel="stylesheet">
+    <link href="css/notosanstc.css" rel="stylesheet">
+
+    <style>
+        @import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+        
+        .word {
+            font-size: 6em;
+        }
+        
+        .answer {
+            font-family: 'Noto Sans TC', sans-serif;
+            font-size: 6em;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" onclick="add_data();">Save</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id='ok'>000</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id='bad' style='color: red'>000</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('img/800724.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="page-heading">
+                        <div class='word' id='word'></div>
+                        <span class="subheading"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-10 mx-auto">
+                <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
+                <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
+                <!-- NOTE: To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
+                <div>
+                    <div class="control-group">
+                        <div class="form-group floating-label-form-group controls">
+                            <label></label>
+                            <input type="text" class="form-control" id="my_answer" style="font-family: 'Noto Sans TC', sans-serif;font-size: 4em;">
+                        </div>
+                    </div>
+                    <br>
+                    <div id="success"></div>
+                    <div class="form-group">
+                        <button class="btn btn-secondary" id="btn" onclick="send();">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <ul class="list-inline text-center">
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                  </span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Copyright &copy; Your Website 2017</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper/popper.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/clean-blog.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase.js"></script>
+
+    <script>
+        var config = {
+            apiKey: "AIzaSyBaINk2-3m_qieit3noR6KdKKm3qRAfEhI",
+            authDomain: "typing-counter.firebaseapp.com",
+            databaseURL: "https://typing-counter.firebaseio.com",
+            projectId: "typing-counter",
+            storageBucket: "typing-counter.appspot.com",
+            messagingSenderId: "48164465117"
+        };
+
+        // 初始化 app
+        firebase.initializeApp(config);
+        // 取得資料庫物件
+        var database = firebase.database();
+
+
+        var basic_path = "/chung-ze/top_term";
+        var all_data = {};
+
+        var w;
+
+        $(document).ready(function() {
+
+            // Get the input field
+            var input_ans = document.getElementById("my_answer");
+            // Execute a function when the user releases a key on the keyboard
+            input_ans.addEventListener("keyup", check);
+
+            w = prepare();
+
+            setWord();
+            get_data();
+        });
+
+        function check(event) {
+            event.preventDefault();
+            // Number 13 is the "Enter" key on the keyboard
+            if (event.keyCode === 13) {
+
+                var ans = document.getElementById('my_answer').value.trim();
+                var word = document.getElementById('word').textContent.trim();
+
+                if (ans == word) {
+
+                    document.getElementById('ok').textContent = (parseInt(document.getElementById('ok').textContent) + 1);
+                    addCount(word);
+
+                } else {
+
+                    document.getElementById('bad').textContent = (parseInt(document.getElementById('bad').textContent) - 1);
+
+                }
+
+                document.getElementById('my_answer').value = '';
+                setWord();
+
+
+            }
+        }
+
+        function addCount(term) {
+            if (all_data == null) {
+                all_data = {};
+            }
+            if (all_data[term] == null) {
+                all_data[term] = 1;
+            } else {
+                all_data[term] = parseInt(all_data[term]) + 1;
+            }
+        }
+
+
+        function send() {
+            //alert( document.getElementById("my_answer").value ) ;
+        }
+
+        function setWord() {
+            var idx = Math.floor(Math.random() * w.length);
+            document.getElementById('word').textContent = w[idx];
+            console.log(idx + "-->" + w[idx]);
+        }
+
+        function prepare() {
+            return ['早安', '早餐', '晚餐', '宵夜', '肚子餓', '想要吃', '不好吃', '味道讚', '不喜歡',
+                '炒飯', '蛋花湯', '貢丸湯', '炒麵', '滷肉飯', '咖哩飯', '排骨便當',
+                '雞腿便當', '飲料', '喝飲料', '太冰了', '好燙', '不敢吃', '吃太飽', '雞腿',
+                '漢堡', '麥當勞', '肯德基', '薯條', '雞塊', '蛋糕', '珍珠奶茶', '紅茶', '奶茶', '綠茶',
+                '檸檬茶', '冰棒', '吃冰', '好冷', '口渴', '喝水', '礦泉水', '全家', '7-11',
+                '萊爾富', 'OK便利商店', '85度c', '全聯福利中心', '家樂福', '寶雅', '大買家',
+                '愛買', '菜市場', '超市', '百貨公司', '台灣楓康超市', '加油站', '郵局',
+                '中華電信', '台灣大哥大', '農會', '遠傳電信', '國泰世華銀行', '領錢', 'ATM', 'uniqlo',
+                'H&M', 'GU', '無印良品', '中友百貨', '大魯閣新時代', '秀泰廣場', '圖書館', '萬代福影城',
+                '太原夜市', '海底撈', '火鍋', '麻辣鍋', '基金會', '大台中環保市場', '台灣銀行', '正仁佛院',
+                '佛堂', 'funbox', '戰鬥陀螺', '光之美少女', '玩具反斗城', '春水堂', '台中肯納自閉症基金會',
+                '萬安聯合集會所', '台中憲兵隊', '維他露基金會', '機甲英雄', '機鬥勇者', '星夢頻道',
+                '日月潭', '九族文化村', '六福村', '麗寶樂園', 'WorldGym', '寶島眼鏡', '診所', '牙醫', '感冒',
+                '頭痛', '發燒', '戴口罩', '噴酒精', '洗手', '長春國民運動中心', '曉明女中', '台中女中',
+                '長春公園', '台中文創園區', '台中第三市場', '新光銀行', '新光三越', '彰化銀行', '台中銀行', '土地銀行',
+                '合庫銀行', '打疫苗', '永豐銀行', '中國信託銀行', 'Youbike', '捷運', '火車站', '公車站', '台中醫院',
+                '兆豐銀行', '合作金庫銀行', '燦坤', '全國電子', '全球影城', '華納威秀', '玉山銀行', '道禾六藝文化館',
+                '纜車', '大遠百', '墾丁', '遠東百貨', '飯店', '台中市政府', '社會局', '大有工作坊', '國立自然科學博物館',
+                '植物園', '海生館', '遊覽車', '高速公路', '安全帶', '台新銀行', '第六市場', '金典綠園道',
+                '廣三sogo百貨', '王道銀行', '上海商業儲蓄銀行', '花旗銀行', '渣打銀行', '全國廣播', '華南銀行',
+                '長榮桂冠酒店', '停車場', '歌劇院', '第一銀行', '新光影城', 'NIKE', '愛迪達', '星巴克', '咖啡',
+                '秋紅谷景觀生態公園', '美樂家', '鮮友火鍋', '越南小吃', '美廉社', '台灣彩卷', '公益彩卷', '全友科學天廈',
+                '中國醫藥大學', '附設醫院', '地下停車場', '中山堂', '杏一醫療用品', '50嵐', '華杏醫療儀器', 'Timberland',
+                '微笑運動用品', 'gogoro', '漢堡王', '新民高中', '梅亭街', '惠宇伯爵', '大思小設', '德瑞克衛浴',
+                'HCG和成衛浴', '803醫院', '亞太電信', '健身工廠', '遠東國際商業銀行', '赤鬼炙燒牛排', '鐵板麵', '玉米濃湯',
+                '南瓜湯', '和牛涮', '石二鍋', 'G2000', '服裝店', 'KOSE', 'YAMAHA', '光陽KYMCO', '三陽SYM', 'HANGTEN', 'Bershka',
+                '品嘉茶餐廳', '海南雞飯', '客林義大利餐廳', '林酒店', '炸雞', '烤雞翅', '海鮮義大利麵', '焗烤麵',
+                '披薩', '松竹寺', '觀音菩薩', '匯豐銀行', '糖村', '輕井澤鍋物', '金針菇', '豆腐', '燕餃', '玉米筍',
+                '鴨血', '屈臣氏', '康是美', '審計新村', '國立台灣美術館', '台中軟體園區', '藝術廣場', '國立中興大學',
+                '惠蓀堂', '必勝客', '第二市場'
+
+            ];
+            /*
+              return ['學術'
+,'語言'
+,'故事'
+,'事件'
+,'研究所'
+,'擁有'
+,'並且'
+,'此外'
+,'傳統'
+,'總統'
+,'員工'
+,'引起'
+,'自然'
+,'針對'
+,'推動'
+,'注意'
+,'那麼'
+,'應用'
+,'科學'
+,'一起'
+,'委員會'
+,'十分'
+,'電影'
+,'研究'
+,'多少'
+,'舉辦'
+,'即使'
+,'條件'
+,'目的'
+,'電話'
+,'合作'
+,'有的'
+,'自我'
+,'最近'
+,'事業'
+,'建設'
+,'那麼'
+,'常常'
+,'態度'
+,'標準'
+,'科技'
+,'動物'
+,'考慮'
+,'或者'
+,'實際'
+,'似乎'
+,'本身'
+,'影響'
+,'民國'
+,'使得'
+,'負責'
+,'不但'
+,'這麼'
+,'團體'
+,'價值'
+,'直接'
+,'幾乎'
+,'發展'
+,'民間'
+,'第三'
+,'產業'
+,'新聞'
+,'爸爸'
+,'討論'
+,'代表'
+,'需求'
+,'那些'
+,'強調'
+,'意義'
+,'人生'
+,'課程'
+,'人士'
+,'制度'
+,'計劃'
+,'政策'
+,'繼續'
+,'變成'
+,'參與'
+,'相信'
+,'土地'
+,'面對'
+,'這裡'
+,'舉行'
+,'人民'
+,'學習'
+,'國小'
+,'現象'
+,'工程'
+,'根據'
+,'中央'
+,'發展'
+,'只是'
+,'部份'
+,'獲得'
+,'女人'
+,'真的'
+,'配合'
+,'女性'
+,'或是'
+,'受到'
+,'一切'
+,'廠商'
+,'音樂'
+,'辦法'
+,'以上'
+,'意見'
+,'所謂'
+,'目標'
+,'起來'
+,'行為'
+,'共同'
+,'個人'
+,'具有'
+,'訓練'
+,'有關'
+,'部分'
+,'透過'
+,'公園'
+,'後來'
+,'另外'
+,'以後'
+,'於是'
+,'經過'
+,'影響'
+,'解決'
+,'處理'
+,'好像'
+,'精神'
+,'如此'
+,'品質'
+,'軟體'
+,'成立'
+,'運動'
+,'觀念'
+,'情形'
+,'原因'
+,'進入'
+,'資源'
+,'作品'
+,'得到'
+,'尤其'
+,'例如'
+,'選擇'
+,'至於'
+,'人類'
+,'成長'
+,'父母'
+,'家庭'
+,'去年'
+,'然而'
+,'我國'
+,'建立'
+,'結果'
+,'要求'
+,'內容'
+,'告訴'
+,'小朋友'
+,'教授'
+,'功能'
+,'產生'
+,'過程'
+,'一般'
+,'建築'
+,'相關'
+,'接受'
+,'業者'
+,'完全'
+,'的話'
+,'組織'
+,'民眾'
+,'事實'
+,'事情'
+,'容易'
+,'會議'
+,'完成'
+,'利用'
+,'生命'
+,'能力'
+,'都市'
+,'別人'
+,'過去'
+,'時代'
+,'相當'
+,'了解'
+,'同學'
+,'增加'
+,'決定'
+,'發展'
+,'能夠'
+,'之間'
+,'設計'
+,'提出'
+,'計畫'
+,'東西'
+,'主要'
+,'為什麼'
+,'媽媽'
+,'經驗'
+,'藝術'
+,'你們'
+,'任何'
+,'當時'
+,'方法'
+,'情況'
+,'還是'
+,'政治'
+,'甚至'
+,'朋友'
+,'所有'
+,'只要'];*/
+
+
+            /*  return [ '服務',
+'機會',
+'怎麼',
+'出現',
+'歷史',
+'昨天',
+'單位',
+'當然',
+'是否',
+'最後',
+'一直',
+'今年',
+'喜歡',
+'發生',
+'造成',
+'台北',
+'參加',
+'包括',
+'其中',
+'一定',
+'國際',
+'特別',
+'其實',
+'不要',
+'地區',
+'技術',
+'第二',
+'開始',
+'大陸',
+'需要',
+'未來',
+'除了',
+'比較',
+'資訊',
+'先生',
+'資料',
+'產品',
+'人員',
+'之後',
+'可是',
+'以及',
+'對於',
+'國內',
+'今天',
+'如何',
+'看到',
+'空間',
+'不會',
+'臺灣',
+'無法',
+'企業',
+'不過',
+'發現',
+'而且',
+'電腦',
+'一樣',
+'同時',
+'然後',
+'很多',
+'方面',
+'非常',
+'教育',
+'成為',
+'指出',
+'經濟',
+'其他',
+'提供',
+'應該',
+'學校',
+'老師',
+'進行',
+'重要',
+'市場',
+'關係',
+'地方',
+'雖然',
+'中心',
+'日本',
+'不同',
+'網路',
+'文化',
+'不能',
+'沒有',
+'孩子',
+'必須',
+'一些',
+'環境',
+'方式',
+'希望',
+'世界',
+'活動',
+'大學',
+'已經',
+'生活',
+'許多',
+'國家',
+'大家',
+'使用',
+'政府',
+'系統',
+'研究',
+'美國',
+'第一',
+'中國',
+'可能',
+'時間',
+'認為',
+'這樣',
+'由於',
+'知道',
+'時候',
+'現在',
+'這些',
+'覺得',
+'工作',
+'目前',
+'因此',
+'但是',
+'社會',
+'如果',
+'表示',
+'公司',
+'學生',
+'台灣',
+'沒有',
+'所以',
+'問題',
+'什麼',
+'因為',
+'他們',
+'自己',
+'可以',
+'我們'] ;*/
+
+
+
+
+
+        }
+
+        function get_data() {
+            // 資料位置
+            var ref = database.ref(basic_path);
+            // 建立資料更新時的方法
+            ref.on('value', read_data);
+
+            function read_data(snapshot) {
+                all_data = snapshot.val();
+                console.log(all_data);
+            }
+        }
+
+        function add_data() {
+
+            // 資料位置
+            var ref = database.ref(basic_path);
+            // 設置資料
+            ref.set(all_data);
+
+            alert('OK');
+        }
+
+        function tmp() {
+            var t = {
+                服務: {
+                    rank: 300
+                },
+                機會: {
+                    rank: 298
+                },
+                怎麼: {
+                    rank: 297
+                },
+                出現: {
+                    rank: 295
+                },
+                歷史: {
+                    rank: 293
+                },
+                昨天: {
+                    rank: 291
+                },
+                單位: {
+                    rank: 289
+                },
+                當然: {
+                    rank: 288
+                },
+                是否: {
+                    rank: 287
+                },
+                最後: {
+                    rank: 286
+                },
+                一直: {
+                    rank: 284
+                },
+                今年: {
+                    rank: 282
+                },
+                喜歡: {
+                    rank: 279
+                },
+                發生: {
+                    rank: 275
+                },
+                造成: {
+                    rank: 274
+                },
+                台北: {
+                    rank: 273
+                },
+                參加: {
+                    rank: 271
+                },
+                包括: {
+                    rank: 270
+                },
+                其中: {
+                    rank: 267
+                },
+                一定: {
+                    rank: 265
+                },
+                國際: {
+                    rank: 264
+                },
+                特別: {
+                    rank: 263
+                },
+                其實: {
+                    rank: 262
+                },
+                不要: {
+                    rank: 261
+                },
+                地區: {
+                    rank: 260
+                },
+                技術: {
+                    rank: 259
+                },
+                第二: {
+                    rank: 254
+                },
+                開始: {
+                    rank: 250
+                },
+                大陸: {
+                    rank: 248
+                },
+                需要: {
+                    rank: 247
+                },
+                未來: {
+                    rank: 244
+                },
+                除了: {
+                    rank: 243
+                },
+                比較: {
+                    rank: 239
+                },
+                資訊: {
+                    rank: 239
+                },
+                先生: {
+                    rank: 238
+                },
+                資料: {
+                    rank: 237
+                },
+                產品: {
+                    rank: 236
+                },
+                人員: {
+                    rank: 234
+                },
+                之後: {
+                    rank: 232
+                },
+                可是: {
+                    rank: 229
+                },
+                以及: {
+                    rank: 227
+                },
+                對於: {
+                    rank: 225
+                },
+                國內: {
+                    rank: 224
+                },
+                今天: {
+                    rank: 223
+                },
+                如何: {
+                    rank: 222
+                },
+                看到: {
+                    rank: 220
+                },
+                空間: {
+                    rank: 219
+                },
+                不會: {
+                    rank: 215
+                },
+                臺灣: {
+                    rank: 214
+                },
+                無法: {
+                    rank: 212
+                },
+                企業: {
+                    rank: 211
+                },
+                不過: {
+                    rank: 210
+                },
+                發現: {
+                    rank: 209
+                },
+                而且: {
+                    rank: 207
+                },
+                電腦: {
+                    rank: 206
+                },
+                一樣: {
+                    rank: 205
+                },
+                同時: {
+                    rank: 204
+                },
+                然後: {
+                    rank: 203
+                },
+                很多: {
+                    rank: 202
+                },
+                方面: {
+                    rank: 201
+                },
+                非常: {
+                    rank: 197
+                },
+                教育: {
+                    rank: 196
+                },
+                成為: {
+                    rank: 195
+                },
+                指出: {
+                    rank: 194
+                },
+                經濟: {
+                    rank: 192
+                },
+                其他: {
+                    rank: 191
+                },
+                提供: {
+                    rank: 190
+                },
+                應該: {
+                    rank: 189
+                },
+                學校: {
+                    rank: 188
+                },
+                老師: {
+                    rank: 187
+                },
+                進行: {
+                    rank: 186
+                },
+                重要: {
+                    rank: 184
+                },
+                市場: {
+                    rank: 182
+                },
+                關係: {
+                    rank: 181
+                },
+                地方: {
+                    rank: 180
+                },
+                雖然: {
+                    rank: 178
+                },
+                中心: {
+                    rank: 177
+                },
+                日本: {
+                    rank: 174
+                },
+                不同: {
+                    rank: 171
+                },
+                網路: {
+                    rank: 170
+                },
+                文化: {
+                    rank: 169
+                },
+                不能: {
+                    rank: 167
+                },
+                沒有: {
+                    rank: 165
+                },
+                孩子: {
+                    rank: 164
+                },
+                必須: {
+                    rank: 163
+                },
+                一些: {
+                    rank: 162
+                },
+                環境: {
+                    rank: 161
+                },
+                方式: {
+                    rank: 154
+                },
+                希望: {
+                    rank: 152
+                },
+                世界: {
+                    rank: 151
+                },
+                活動: {
+                    rank: 149
+                },
+                大學: {
+                    rank: 146
+                },
+                已經: {
+                    rank: 145
+                },
+                生活: {
+                    rank: 144
+                },
+                許多: {
+                    rank: 142
+                },
+                國家: {
+                    rank: 141
+                },
+                大家: {
+                    rank: 140
+                },
+                使用: {
+                    rank: 139
+                },
+                政府: {
+                    rank: 138
+                },
+                系統: {
+                    rank: 137
+                },
+                研究: {
+                    rank: 136
+                },
+                美國: {
+                    rank: 132
+                },
+                第一: {
+                    rank: 131
+                },
+                中國: {
+                    rank: 130
+                },
+                可能: {
+                    rank: 128
+                },
+                時間: {
+                    rank: 125
+                },
+                認為: {
+                    rank: 124
+                },
+                這樣: {
+                    rank: 122
+                },
+                由於: {
+                    rank: 121
+                },
+                知道: {
+                    rank: 120
+                },
+                時候: {
+                    rank: 119
+                },
+                現在: {
+                    rank: 117
+                },
+                這些: {
+                    rank: 115
+                },
+                覺得: {
+                    rank: 114
+                },
+                工作: {
+                    rank: 112
+                },
+                目前: {
+                    rank: 109
+                },
+                因此: {
+                    rank: 108
+                },
+                但是: {
+                    rank: 106
+                },
+                社會: {
+                    rank: 101
+                },
+                如果: {
+                    rank: 100
+                },
+                表示: {
+                    rank: 99
+                },
+                公司: {
+                    rank: 98
+                },
+                學生: {
+                    rank: 96
+                },
+                台灣: {
+                    rank: 86
+                },
+                沒有: {
+                    rank: 81
+                },
+                所以: {
+                    rank: 79
+                },
+                問題: {
+                    rank: 75
+                },
+                什麼: {
+                    rank: 74
+                },
+                因為: {
+                    rank: 61
+                },
+                他們: {
+                    rank: 49
+                },
+                自己: {
+                    rank: 45
+                },
+                可以: {
+                    rank: 42
+                },
+                我們: {
+                    rank: 18
+                }
+            }
+
+            var t2 = {
+
+                學術: {
+                    rank: 600
+                },
+                語言: {
+                    rank: 599
+                },
+                故事: {
+                    rank: 598
+                },
+                事件: {
+                    rank: 597
+                },
+                研究所: {
+                    rank: 595
+                },
+                擁有: {
+                    rank: 595
+                },
+                並且: {
+                    rank: 594
+                },
+                此外: {
+                    rank: 593
+                },
+                傳統: {
+                    rank: 592
+                },
+                總統: {
+                    rank: 591
+                },
+                員工: {
+                    rank: 590
+                },
+                引起: {
+                    rank: 587
+                },
+                自然: {
+                    rank: 587
+                },
+                針對: {
+                    rank: 587
+                },
+                推動: {
+                    rank: 586
+                },
+                注意: {
+                    rank: 585
+                },
+                那麼: {
+                    rank: 584
+                },
+                應用: {
+                    rank: 583
+                },
+                科學: {
+                    rank: 582
+                },
+                一起: {
+                    rank: 579
+                },
+                委員會: {
+                    rank: 579
+                },
+                十分: {
+                    rank: 575
+                },
+                電影: {
+                    rank: 574
+                },
+                研究: {
+                    rank: 572
+                },
+                多少: {
+                    rank: 571
+                },
+                舉辦: {
+                    rank: 570
+                },
+                即使: {
+                    rank: 568
+                },
+                條件: {
+                    rank: 567
+                },
+                目的: {
+                    rank: 565
+                },
+                電話: {
+                    rank: 565
+                },
+                合作: {
+                    rank: 563
+                },
+                有的: {
+                    rank: 561
+                },
+                自我: {
+                    rank: 558
+                },
+                最近: {
+                    rank: 557
+                },
+                事業: {
+                    rank: 555
+                },
+                建設: {
+                    rank: 555
+                },
+                那麼: {
+                    rank: 554
+                },
+                常常: {
+                    rank: 553
+                },
+                態度: {
+                    rank: 551
+                },
+                標準: {
+                    rank: 551
+                },
+                科技: {
+                    rank: 549
+                },
+                動物: {
+                    rank: 549
+                },
+                考慮: {
+                    rank: 548
+                },
+                或者: {
+                    rank: 547
+                },
+                實際: {
+                    rank: 546
+                },
+                似乎: {
+                    rank: 544
+                },
+                本身: {
+                    rank: 543
+                },
+                影響: {
+                    rank: 542
+                },
+                民國: {
+                    rank: 539
+                },
+                使得: {
+                    rank: 539
+                },
+                負責: {
+                    rank: 539
+                },
+                不但: {
+                    rank: 537
+                },
+                這麼: {
+                    rank: 534
+                },
+                團體: {
+                    rank: 533
+                },
+                價值: {
+                    rank: 532
+                },
+                直接: {
+                    rank: 530
+                },
+                幾乎: {
+                    rank: 528
+                },
+                發展: {
+                    rank: 528
+                },
+                民間: {
+                    rank: 526
+                },
+                第三: {
+                    rank: 524
+                },
+                產業: {
+                    rank: 523
+                },
+                新聞: {
+                    rank: 522
+                },
+                爸爸: {
+                    rank: 520
+                },
+                討論: {
+                    rank: 520
+                },
+                代表: {
+                    rank: 518
+                },
+                需求: {
+                    rank: 518
+                },
+                那些: {
+                    rank: 515
+                },
+                強調: {
+                    rank: 515
+                },
+                意義: {
+                    rank: 513
+                },
+                人生: {
+                    rank: 512
+                },
+                課程: {
+                    rank: 510
+                },
+                人士: {
+                    rank: 509
+                },
+                制度: {
+                    rank: 506
+                },
+                計劃: {
+                    rank: 505
+                },
+                政策: {
+                    rank: 504
+                },
+                繼續: {
+                    rank: 503
+                },
+                變成: {
+                    rank: 501
+                },
+                參與: {
+                    rank: 500
+                },
+                相信: {
+                    rank: 499
+                },
+                土地: {
+                    rank: 498
+                },
+                面對: {
+                    rank: 495
+                },
+                這裡: {
+                    rank: 495
+                },
+                舉行: {
+                    rank: 495
+                },
+                人民: {
+                    rank: 493
+                },
+                學習: {
+                    rank: 493
+                },
+                國小: {
+                    rank: 492
+                },
+                現象: {
+                    rank: 491
+                },
+                工程: {
+                    rank: 489
+                },
+                根據: {
+                    rank: 489
+                },
+                中央: {
+                    rank: 486
+                },
+                發展: {
+                    rank: 484
+                },
+                只是: {
+                    rank: 481
+                },
+                部份: {
+                    rank: 481
+                },
+                獲得: {
+                    rank: 481
+                },
+                女人: {
+                    rank: 479
+                },
+                真的: {
+                    rank: 477
+                },
+                配合: {
+                    rank: 477
+                },
+                女性: {
+                    rank: 476
+                },
+                或是: {
+                    rank: 473
+                },
+                受到: {
+                    rank: 472
+                },
+                一切: {
+                    rank: 471
+                },
+                廠商: {
+                    rank: 469
+                },
+                音樂: {
+                    rank: 466
+                },
+                辦法: {
+                    rank: 464
+                },
+                以上: {
+                    rank: 463
+                },
+                意見: {
+                    rank: 462
+                },
+                所謂: {
+                    rank: 461
+                },
+                目標: {
+                    rank: 459
+                },
+                起來: {
+                    rank: 458
+                },
+                行為: {
+                    rank: 457
+                },
+                共同: {
+                    rank: 456
+                },
+                個人: {
+                    rank: 454
+                },
+                具有: {
+                    rank: 453
+                },
+                訓練: {
+                    rank: 452
+                },
+                有關: {
+                    rank: 451
+                },
+                部分: {
+                    rank: 450
+                },
+                透過: {
+                    rank: 449
+                },
+                公園: {
+                    rank: 447
+                },
+                後來: {
+                    rank: 447
+                },
+                另外: {
+                    rank: 446
+                },
+                以後: {
+                    rank: 444
+                },
+                於是: {
+                    rank: 443
+                },
+                經過: {
+                    rank: 442
+                },
+                影響: {
+                    rank: 441
+                },
+                解決: {
+                    rank: 440
+                },
+                處理: {
+                    rank: 439
+                },
+                好像: {
+                    rank: 437
+                },
+                精神: {
+                    rank: 436
+                },
+                如此: {
+                    rank: 434
+                },
+                品質: {
+                    rank: 432
+                },
+                軟體: {
+                    rank: 432
+                },
+                成立: {
+                    rank: 431
+                },
+                運動: {
+                    rank: 430
+                },
+                觀念: {
+                    rank: 429
+                },
+                情形: {
+                    rank: 423
+                },
+                原因: {
+                    rank: 421
+                },
+                進入: {
+                    rank: 420
+                },
+                資源: {
+                    rank: 419
+                },
+                作品: {
+                    rank: 416
+                },
+                得到: {
+                    rank: 416
+                },
+                尤其: {
+                    rank: 412
+                },
+                例如: {
+                    rank: 411
+                },
+                選擇: {
+                    rank: 410
+                },
+                至於: {
+                    rank: 409
+                },
+                人類: {
+                    rank: 408
+                },
+                成長: {
+                    rank: 407
+                },
+                父母: {
+                    rank: 406
+                },
+                家庭: {
+                    rank: 405
+                },
+                去年: {
+                    rank: 404
+                },
+                然而: {
+                    rank: 403
+                },
+                我國: {
+                    rank: 398
+                },
+                建立: {
+                    rank: 398
+                },
+                結果: {
+                    rank: 397
+                },
+                要求: {
+                    rank: 396
+                },
+                內容: {
+                    rank: 395
+                },
+                告訴: {
+                    rank: 392
+                },
+                小朋友: {
+                    rank: 391
+                },
+                教授: {
+                    rank: 389
+                },
+                功能: {
+                    rank: 387
+                },
+                產生: {
+                    rank: 385
+                },
+                過程: {
+                    rank: 383
+                },
+                一般: {
+                    rank: 382
+                },
+                建築: {
+                    rank: 379
+                },
+                相關: {
+                    rank: 379
+                },
+                接受: {
+                    rank: 378
+                },
+                業者: {
+                    rank: 376
+                },
+                完全: {
+                    rank: 372
+                },
+                的話: {
+                    rank: 368
+                },
+                組織: {
+                    rank: 367
+                },
+                民眾: {
+                    rank: 366
+                },
+                事實: {
+                    rank: 364
+                },
+                事情: {
+                    rank: 363
+                },
+                容易: {
+                    rank: 359
+                },
+                會議: {
+                    rank: 359
+                },
+                完成: {
+                    rank: 357
+                },
+                利用: {
+                    rank: 355
+                },
+                生命: {
+                    rank: 354
+                },
+                能力: {
+                    rank: 352
+                },
+                都市: {
+                    rank: 352
+                },
+                別人: {
+                    rank: 351
+                },
+                過去: {
+                    rank: 350
+                },
+                時代: {
+                    rank: 347
+                },
+                相當: {
+                    rank: 345
+                },
+                了解: {
+                    rank: 344
+                },
+                同學: {
+                    rank: 343
+                },
+                增加: {
+                    rank: 341
+                },
+                決定: {
+                    rank: 339
+                },
+                發展: {
+                    rank: 338
+                },
+                能夠: {
+                    rank: 337
+                },
+                之間: {
+                    rank: 336
+                },
+                設計: {
+                    rank: 335
+                },
+                提出: {
+                    rank: 331
+                },
+                計畫: {
+                    rank: 330
+                },
+                東西: {
+                    rank: 329
+                },
+                主要: {
+                    rank: 323
+                },
+                為什麼: {
+                    rank: 322
+                },
+                媽媽: {
+                    rank: 320
+                },
+                經驗: {
+                    rank: 318
+                },
+                藝術: {
+                    rank: 318
+                },
+                你們: {
+                    rank: 317
+                },
+                任何: {
+                    rank: 315
+                },
+                當時: {
+                    rank: 314
+                },
+                方法: {
+                    rank: 311
+                },
+                情況: {
+                    rank: 310
+                },
+                還是: {
+                    rank: 309
+                },
+                政治: {
+                    rank: 308
+                },
+                甚至: {
+                    rank: 304
+                },
+                朋友: {
+                    rank: 303
+                },
+                所有: {
+                    rank: 302
+                },
+                只要: {
+                    rank: 301
+                }
+
+            }
+
+            var t3 = {
+                將來: {
+                    rank: 899
+                },
+                公尺: {
+                    rank: 898
+                },
+                結合: {
+                    rank: 897
+                },
+                大概: {
+                    rank: 895
+                },
+                意識: {
+                    rank: 895
+                },
+                到底: {
+                    rank: 893
+                },
+                結束: {
+                    rank: 892
+                },
+                在於: {
+                    rank: 889
+                },
+                不錯: {
+                    rank: 886
+                },
+                加入: {
+                    rank: 886
+                },
+                報告: {
+                    rank: 885
+                },
+                採用: {
+                    rank: 884
+                },
+                等等: {
+                    rank: 883
+                },
+                規劃: {
+                    rank: 882
+                },
+                加以: {
+                    rank: 879
+                },
+                協會: {
+                    rank: 879
+                },
+                加強: {
+                    rank: 877
+                },
+                作業: {
+                    rank: 874
+                },
+                系列: {
+                    rank: 874
+                },
+                期間: {
+                    rank: 874
+                },
+                充滿: {
+                    rank: 870
+                },
+                程式: {
+                    rank: 870
+                },
+                歐洲: {
+                    rank: 870
+                },
+                隨著: {
+                    rank: 870
+                },
+                整體: {
+                    rank: 869
+                },
+                正在: {
+                    rank: 866
+                },
+                根本: {
+                    rank: 866
+                },
+                協助: {
+                    rank: 864
+                },
+                小姐: {
+                    rank: 861
+                },
+                成本: {
+                    rank: 859
+                },
+                全球: {
+                    rank: 856
+                },
+                而已: {
+                    rank: 856
+                },
+                溝通: {
+                    rank: 856
+                },
+                之下: {
+                    rank: 851
+                },
+                北京: {
+                    rank: 851
+                },
+                台北市: {
+                    rank: 851
+                },
+                回到: {
+                    rank: 851
+                },
+                彼此: {
+                    rank: 851
+                },
+                年輕: {
+                    rank: 848
+                },
+                雙方: {
+                    rank: 847
+                },
+                找到: {
+                    rank: 846
+                },
+                婦女: {
+                    rank: 845
+                },
+                老人: {
+                    rank: 844
+                },
+                首先: {
+                    rank: 842
+                },
+                國中: {
+                    rank: 840
+                },
+                範圍: {
+                    rank: 839
+                },
+                加上: {
+                    rank: 838
+                },
+                工作: {
+                    rank: 834
+                },
+                申請: {
+                    rank: 834
+                },
+                兒童: {
+                    rank: 834
+                },
+                長期: {
+                    rank: 833
+                },
+                開放: {
+                    rank: 831
+                },
+                對象: {
+                    rank: 831
+                },
+                前往: {
+                    rank: 830
+                },
+                缺乏: {
+                    rank: 829
+                },
+                不斷: {
+                    rank: 824
+                },
+                投資: {
+                    rank: 824
+                },
+                建議: {
+                    rank: 824
+                },
+                傳統: {
+                    rank: 824
+                },
+                總是: {
+                    rank: 824
+                },
+                特殊: {
+                    rank: 823
+                },
+                人口: {
+                    rank: 821
+                },
+                服務: {
+                    rank: 821
+                },
+                發揮: {
+                    rank: 818
+                },
+                擔任: {
+                    rank: 818
+                },
+                原來: {
+                    rank: 815
+                },
+                鼓勵: {
+                    rank: 815
+                },
+                規劃: {
+                    rank: 812
+                },
+                警方: {
+                    rank: 812
+                },
+                提高: {
+                    rank: 811
+                },
+                調查: {
+                    rank: 810
+                },
+                同樣: {
+                    rank: 808
+                },
+                變化: {
+                    rank: 808
+                },
+                以為: {
+                    rank: 805
+                },
+                通過: {
+                    rank: 805
+                },
+                形式: {
+                    rank: 803
+                },
+                來自: {
+                    rank: 803
+                },
+                智慧: {
+                    rank: 801
+                },
+                節目: {
+                    rank: 798
+                },
+                實施: {
+                    rank: 797
+                },
+                工具: {
+                    rank: 795
+                },
+                重視: {
+                    rank: 795
+                },
+                否則: {
+                    rank: 792
+                },
+                教師: {
+                    rank: 792
+                },
+                原則: {
+                    rank: 789
+                },
+                校長: {
+                    rank: 789
+                },
+                報導: {
+                    rank: 789
+                },
+                家長: {
+                    rank: 788
+                },
+                改善: {
+                    rank: 785
+                },
+                維持: {
+                    rank: 785
+                },
+                委員: {
+                    rank: 784
+                },
+                之前: {
+                    rank: 782
+                },
+                有時: {
+                    rank: 781
+                },
+                結果: {
+                    rank: 780
+                },
+                特色: {
+                    rank: 777
+                },
+                減少: {
+                    rank: 777
+                },
+                通常: {
+                    rank: 775
+                },
+                社區: {
+                    rank: 774
+                },
+                昨日: {
+                    rank: 773
+                },
+                超過: {
+                    rank: 771
+                },
+                力量: {
+                    rank: 767
+                },
+                自然: {
+                    rank: 767
+                },
+                教育部: {
+                    rank: 765
+                },
+                反而: {
+                    rank: 762
+                },
+                行政: {
+                    rank: 762
+                },
+                開發: {
+                    rank: 762
+                },
+                有效: {
+                    rank: 758
+                },
+                媒體: {
+                    rank: 758
+                },
+                管理: {
+                    rank: 757
+                },
+                銀行: {
+                    rank: 756
+                },
+                開放: {
+                    rank: 755
+                },
+                人才: {
+                    rank: 752
+                },
+                公共: {
+                    rank: 752
+                },
+                從事: {
+                    rank: 752
+                },
+                仍然: {
+                    rank: 750
+                },
+                感到: {
+                    rank: 750
+                },
+                領域: {
+                    rank: 749
+                },
+                重新: {
+                    rank: 748
+                },
+                業務: {
+                    rank: 747
+                },
+                往往: {
+                    rank: 746
+                },
+                顯示: {
+                    rank: 745
+                },
+                推出: {
+                    rank: 744
+                },
+                城市: {
+                    rank: 742
+                },
+                責任: {
+                    rank: 736
+                },
+                簡單: {
+                    rank: 736
+                },
+                心理: {
+                    rank: 735
+                },
+                逐漸: {
+                    rank: 734
+                },
+                一點: {
+                    rank: 733
+                },
+                大量: {
+                    rank: 731
+                },
+                說明: {
+                    rank: 730
+                },
+                工業: {
+                    rank: 729
+                },
+                方向: {
+                    rank: 728
+                },
+                價格: {
+                    rank: 727
+                },
+                使用: {
+                    rank: 726
+                },
+                正式: {
+                    rank: 721
+                },
+                歡迎: {
+                    rank: 721
+                },
+                因素: {
+                    rank: 720
+                },
+                快樂: {
+                    rank: 719
+                },
+                真正: {
+                    rank: 716
+                },
+                開發: {
+                    rank: 716
+                },
+                當地: {
+                    rank: 716
+                },
+                謝謝: {
+                    rank: 713
+                },
+                終於: {
+                    rank: 711
+                },
+                教學: {
+                    rank: 709
+                },
+                經營: {
+                    rank: 709
+                },
+                思想: {
+                    rank: 707
+                },
+                回來: {
+                    rank: 705
+                },
+                電子: {
+                    rank: 705
+                },
+                不再: {
+                    rank: 704
+                },
+                經常: {
+                    rank: 703
+                },
+                主任: {
+                    rank: 702
+                },
+                存在: {
+                    rank: 701
+                },
+                裡面: {
+                    rank: 700
+                },
+                晚上: {
+                    rank: 699
+                },
+                避免: {
+                    rank: 697
+                },
+                屬於: {
+                    rank: 697
+                },
+                不可: {
+                    rank: 695
+                },
+                興趣: {
+                    rank: 695
+                },
+                行動: {
+                    rank: 692
+                },
+                表現: {
+                    rank: 692
+                },
+                校園: {
+                    rank: 692
+                },
+                聲音: {
+                    rank: 690
+                },
+                只有: {
+                    rank: 689
+                },
+                主義: {
+                    rank: 688
+                },
+                不少: {
+                    rank: 687
+                },
+                男人: {
+                    rank: 686
+                },
+                小時: {
+                    rank: 684
+                },
+                分別: {
+                    rank: 684
+                },
+                中國人: {
+                    rank: 683
+                },
+                中共: {
+                    rank: 682
+                },
+                專業: {
+                    rank: 681
+                },
+                經費: {
+                    rank: 680
+                },
+                小孩: {
+                    rank: 678
+                },
+                願意: {
+                    rank: 677
+                },
+                比賽: {
+                    rank: 676
+                },
+                曾經: {
+                    rank: 674
+                },
+                附近: {
+                    rank: 673
+                },
+                父親: {
+                    rank: 672
+                },
+                不僅: {
+                    rank: 670
+                },
+                專家: {
+                    rank: 670
+                },
+                清楚: {
+                    rank: 669
+                },
+                效果: {
+                    rank: 667
+                },
+                狀況: {
+                    rank: 664
+                },
+                交通: {
+                    rank: 662
+                },
+                設計: {
+                    rank: 661
+                },
+                機構: {
+                    rank: 660
+                },
+                角色: {
+                    rank: 658
+                },
+                記者: {
+                    rank: 658
+                },
+                規定: {
+                    rank: 657
+                },
+                積極: {
+                    rank: 656
+                },
+                而是: {
+                    rank: 654
+                },
+                作為: {
+                    rank: 653
+                },
+                程度: {
+                    rank: 652
+                },
+                知識: {
+                    rank: 650
+                },
+                身體: {
+                    rank: 649
+                },
+                下午: {
+                    rank: 641
+                },
+                人們: {
+                    rank: 638
+                },
+                香港: {
+                    rank: 638
+                },
+                也許: {
+                    rank: 637
+                },
+                主管: {
+                    rank: 635
+                },
+                電視: {
+                    rank: 635
+                },
+                壓力: {
+                    rank: 634
+                },
+                感覺: {
+                    rank: 630
+                },
+                母親: {
+                    rank: 629
+                },
+                階段: {
+                    rank: 628
+                },
+                醫院: {
+                    rank: 627
+                },
+                值得: {
+                    rank: 626
+                },
+                改變: {
+                    rank: 624
+                },
+                就是: {
+                    rank: 624
+                },
+                學者: {
+                    rank: 623
+                },
+                努力: {
+                    rank: 621
+                },
+                管理: {
+                    rank: 619
+                },
+                小組: {
+                    rank: 618
+                },
+                以前: {
+                    rank: 615
+                },
+                嚴重: {
+                    rank: 615
+                },
+                結構: {
+                    rank: 613
+                },
+                東尼: {
+                    rank: 610
+                },
+                達到: {
+                    rank: 610
+                },
+                實在: {
+                    rank: 609
+                },
+                一下: {
+                    rank: 607
+                },
+                基本: {
+                    rank: 607
+                },
+                設備: {
+                    rank: 606
+                },
+                之外: {
+                    rank: 604
+                },
+                形成: {
+                    rank: 604
+                }
+            }
+
+            // 資料位置
+            //var ref = database.ref( '/top_term_rank');
+            // 設置資料
+            //ref.set(t3) ;     
+
+            //alert('OK');
+
+        }
+
+
+        function show_all_data() {
+            var a = 0;
+            for (var k in all_data) {
+                console.log(a + ' ---> ' + k + ',' + all_data[k]);
+                a++;
+            }
+        }
+    </script>
+
+</body>
+
+</html>

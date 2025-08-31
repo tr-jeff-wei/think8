@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>聽打練習 - L10 訂旅館</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/6ec3c90698.js" crossorigin="anonymous"></script>
+    <style>
+        .floating-block {
+            background: rgba(153, 205, 50, 0.99);
+            color: white;
+            width: 708px;
+            z-index: 100;
+            position: fixed;
+            top: 330px;
+            height: 50px;
+        }
+    </style>
+</head>
+
+<body class="container" style="margin: 10px;max-width: 1250px">
+    <div class="floating-block">
+    </div>
+    <div class="row">
+        <div class="col">
+            <div id='player'>
+                <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/6UZOPofLoAI?controls=0" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe> -->
+            </div>
+        </div>
+        <div class="col">
+            <div style="margin-top: 10px;" id='list-item'>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</body>
+
+<script>
+    var stoptime = 5;
+    // 2. This code loads the IFrame Player API code asynchronously.
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // 3. This function creates an <iframe> (and YouTube player)
+    //    after the API code downloads.
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+            height: '398',
+            width: '707',
+            videoId: 'm-AP9oOZZjs',
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+
+    // 4. The API will call this function when the video player is ready.
+    function onPlayerReady(event) {
+        event.target.seekTo(1);
+        //event.target.playVideo();
+    }
+
+    // 5. The API calls this function when the player's state changes.
+    //    The function indicates that when playing a video (state=1),
+    //    the player should play for six seconds and then stop.
+    var done = false;
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+            setTimeout(stopVideo, stoptime * 1000);
+            done = true;
+        }
+    }
+    function stopVideo() {
+        //player.stopVideo();
+        player.pauseVideo();
+    }
+
+    function seek(ss, stops) {
+        player.playVideo();
+        player.seekTo(ss);
+        setTimeout(stopVideo, stops * 1000);
+
+    }
+
+
+    var record = [
+    '0:07,0:08,聽說你要出國啊',
+'0:09,0:11,公司派我去日本',
+'0:13,0:14,你預備哪一天去呢',
+'0:15,0:18,我打算這個月十二號動身',
+'0:18,0:21,你是住朋友家呢還是住旅館呢',
+'0:21,0:24,我不想打擾朋友已經訂好旅館了',
+'0:24,0:26,你訂的是什麼樣的旅館',
+'0:27,0:28,一家觀光飯店',
+'0:29,0:30,房間好嗎',
+'0:30,0:33,以前我住過一次還不錯',
+'0:33,0:35,價錢怎麼樣貴不貴',
+'0:36,0:37,不貴',
+'0:37,0:38,一間雙人房',
+'0:38,0:42,一天大概台幣三千六百元',
+'0:43,0:45,在日本算是便宜了',
+'0:46,0:47,我好想去日本旅行',
+'0:48,0:50,我是去工作不是去旅行',
+'0:51,0:54,你以為這麼容易啊好玩啊',
+'1:01,1:03,最近好忙喔',
+'1:03,1:04,為什麼呢',
+'1:04,1:05,我要去日本',
+'1:06,1:09,所以手邊的工作要做完才可以',
+'1:09,1:10,很好啊',
+'1:11,1:12,你什麼時候動身',
+'1:12,1:14,這個月十二號',
+'1:14,1:16,你訂旅館了嗎',
+'1:16,1:17,還沒了',
+'1:17,1:19,還好你提醒我',
+'1:19,1:21,這個時候可要好好聽',
+'1:21,1:23,怎麼訂旅館',
+'1:23,1:24,怎麼問價錢',
+'1:25,1:27,這一課訂旅館的對話',
+'1:27,1:28,都是很常用的',
+'1:42,1:43,張先生',
+'1:43,1:46,您預備哪天去日本',
+'1:47,1:50,我打算這個月十二號動身',
+'1:52,1:54,您是住朋友家呢',
+'1:54,1:56,還是住旅館呢',
+'1:57,1:59,我不想打擾朋友',
+'2:00,2:02,已經訂好旅館了',
+'2:03,2:06,您訂的是什麼樣的旅館',
+'2:07,2:09,一家觀光飯店',
+'2:10,2:12,以前我住過一次 還不錯',
+'2:14,2:16,價錢怎麼樣 貴不貴',
+'2:18,2:21,不貴 一間雙人房',
+'2:21,2:24,一天大概台幣三千六百元',
+'2:25,2:30,今天訂旅館這一課會用到哪些生詞呢',
+'2:43,2:44,旅館',
+'2:45,2:46,預備',
+'2:48,2:49,日本',
+'2:50,2:51,動身',
+'2:53,2:54,打擾',
+'2:55,2:56,訂',
+'2:58,2:59,觀光飯店',
+'3:01,3:02,以前',
+'3:04,3:04,價錢',
+'3:07,3:08,雙人房',
+'3:09,3:10,大概',
+'3:15,3:16,你要去哪裡',
+'3:17,3:18,我要去日本',
+'3:20,3:21,你打算什麼時候去',
+'3:23,3:25,打算是什麼意思',
+'3:26,3:29,打算是預備或計畫做什麼事情',
+'3:31,3:32,比方說',
+'3:32,3:35,李小姐打算明天去看王先生',
+'3:39,3:40,你打算什麼時候去日本',
+'3:41,3:44,我打算這個月十二號去日本',
+'3:45,3:46,你打算住哪裡',
+'3:48,3:50,我打算住觀光飯店',
+'3:50,3:53,妳打算住觀光飯店',
+'3:54,3:57,我一定要住觀光飯店',
+'3:57,3:59,你打算花多少錢呢',
+'3:59,4:02,我打算花三千六百元',
+'4:03,4:05,很好你訂好飯店了嗎',
+'4:05,4:07,我打算明天訂飯店',
+'4:08,4:10,你還是早一點準備比較好',
+'4:10,4:11,我懂了',
+'4:11,4:14,什麼事都要先打算好',
+'4:14,4:15,沒錯',
+'4:15,4:18,學會打算的用法了嗎',
+'4:18,4:19,要會打算喔'
+    ];
+
+    function set_record() {
+
+        let my_target = document.getElementById('list-item');
+        for (let item of record) {
+            let tokens = item.split(',');
+            let s = get_time_sec(tokens[0]);
+            let e = get_time_sec(tokens[1]);
+            let diff = (e - s) < 3 ? 3 : (e - s);
+            //console.log( '===> '+ +' '+get_time_sec(tokens[1])) ;
+            //console.log(tokens) ;
+
+            ///////////////
+            let content = '<div class="form-group"><div class="form-row" style="margin-bottom: 5px;"><div class="col-1">' +
+                '<button type="button" class="btn btn-outline-info btn-sm" onclick="seek(' + s + ',' + diff + ');">' +
+                '<i class="fas fa-play"></i></button></div><div class="col-11"> <label>' + get_mask_str(tokens[2]) +
+                '</label></div></div><div class="form-row"><div class="col-10"><input type="text" class="form-control"></div>' +
+                '<div class="col-2"><button type="button" data-ans="' + tokens[2].replace(/\s/g, '') + '" class="btn btn-danger" onclick="check_ans(this);" ><i class="fas fa-check-circle"></i></button></div></div></div>';
+
+            my_target.innerHTML += content;
+
+        }
+    }
+    function get_time_sec(str) {
+        let ts = str.split(':');
+        return parseInt(ts[0]) * 60 + parseInt(ts[1]);
+    }
+    function get_mask_str(str) {
+        if (str.length > 5) {
+            return str.substr(0, 2) + '...' + str.substr(str.length - 2, str.length);
+        } else {
+            return str.substr(0, 2) + '...';
+        }
+    }
+    function check_ans(ans) {
+        var answer = ans.getAttribute('data-ans');
+        var result = ans.parentElement.previousElementSibling.children[0].value;
+        result = result.replace(/\s/g, '');
+        if (answer == result) {
+            let par = ans.parentElement.parentElement.parentElement;
+            par.style.display = "none";
+        } else {
+            ans.innerHTML = '<i class="fas fa-times"></i>';
+        }
+    }
+    set_record();
+</script>
+
+</html>

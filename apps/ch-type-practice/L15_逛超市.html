@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>聽打練習 - L15 逛超市</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/6ec3c90698.js" crossorigin="anonymous"></script>
+    <style>
+        .floating-block {
+            background: rgba(153, 205, 50, 0.99);
+            color: white;
+            width: 708px;
+            z-index: 100;
+            position: fixed;
+            top: 330px;
+            height: 50px;
+        }
+    </style>
+</head>
+
+<body class="container" style="margin: 10px;max-width: 1250px">
+    <div class="floating-block">
+    </div>
+    <div class="row">
+        <div class="col">
+            <div id='player'>
+                <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/6UZOPofLoAI?controls=0" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe> -->
+            </div>
+        </div>
+        <div class="col">
+            <div style="margin-top: 10px;" id='list-item'>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</body>
+
+<script>
+    var stoptime = 5;
+    // 2. This code loads the IFrame Player API code asynchronously.
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // 3. This function creates an <iframe> (and YouTube player)
+    //    after the API code downloads.
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+            height: '398',
+            width: '707',
+            videoId: 'c89z3vPUiP4',
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+
+    // 4. The API will call this function when the video player is ready.
+    function onPlayerReady(event) {
+        event.target.seekTo(1);
+        //event.target.playVideo();
+    }
+
+    // 5. The API calls this function when the player's state changes.
+    //    The function indicates that when playing a video (state=1),
+    //    the player should play for six seconds and then stop.
+    var done = false;
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+            setTimeout(stopVideo, stoptime * 1000);
+            done = true;
+        }
+    }
+    function stopVideo() {
+        //player.stopVideo();
+        player.pauseVideo();
+    }
+
+    function seek(ss, stops) {
+        player.playVideo();
+        player.seekTo(ss);
+        setTimeout(stopVideo, stops * 1000);
+
+    }
+
+
+    var record = [
+    '0:07,0:09,謝謝你陪我來超市買東西',
+'0:09,0:12,別客氣我也買了不少東西呢',
+'0:12,0:14,這家新開幕的超級市場',
+'0:14,0:16,價錢很公道',
+'0:16,0:19,是啊好新鮮的水果',
+'0:19,0:20,價錢也不貴',
+'0:21,0:24,而且購物環境也很舒服',
+'0:24,0:27,是啊我平常很少逛超市',
+'0:27,0:30,沒想到超市這麼方便',
+'0:30,0:34,超級市場比起傳統市場貨色齊全',
+'0:35,0:37,加上有冷藏設備',
+'0:37,0:40,所以食物更新鮮衛生',
+'0:40,0:43,除了東西價廉物美之外',
+'0:43,0:44,停車也很方便',
+'0:45,0:47,超級市場的生鮮蔬果',
+'0:47,0:49,都是直接向產地批發的',
+'0:49,0:51,所以價錢比較便宜',
+'0:51,0:54,下次還可以約好在這兒吃午餐呢',
+'0:54,0:56,沒問題我請課',
+'1:05,1:06,又去買東西了',
+'1:06,1:09,是啊超級市場打折嘛',
+'1:09,1:11,我沒去過超級市場',
+'1:11,1:12,不會吧',
+'1:13,1:15,超級市場購物環境很舒服',
+'1:15,1:18,東西也很齊全',
+'1:18,1:19,聽起來很不錯',
+'1:20,1:21,是啊',
+'1:21,1:23,有空可以去逛一逛',
+'1:24,1:27,想知道超級市場是怎樣的地方嗎',
+'1:38,1:42,好新鮮的水果 價錢也不貴',
+'1:43,1:47,這家新開幕的超級市場價錢公道',
+'1:47,1:50,而且購物環境也很舒服',
+'1:51,1:55,超級市場比起傳統市場貨色齊全',
+'1:56,1:59,超級市場有冷藏設備',
+'2:00,2:02,所以食物更新鮮 衛生',
+'2:04,2:06,除了東西價廉物美之外',
+'2:07,2:08,停車也很方便',
+'2:09,2:12,超級市場的生鮮蔬果',
+'2:12,2:15,都是直接向產地批發的',
+'2:15,2:18,所以價錢比較便宜',
+'2:19,2:21,許多人下班以後',
+'2:21,2:23,都會到這裡買菜',
+'2:24,2:26,超級市場營業時間長',
+'2:27,2:30,買東西不但方便而且省時',
+'2:41,2:43,超級市場',
+'2:46,2:47,價錢',
+'2:49,2:50,開幕',
+'2:53,2:55,傳統市場',
+'2:59,3:00,貨色齊全',
+'3:04,3:05,冷藏設備',
+'3:08,3:09,衛生',
+'3:12,3:14,價廉物美',
+'3:17,3:18,方便',
+'3:20,3:22,直接',
+'3:24,3:26,產地',
+'3:28,3:30,批發',
+'3:32,3:34,省時',
+'3:41,3:43,快開學了超級市場有打折',
+'3:44,3:46,所以趕快去買了一些文具',
+'3:47,3:51,口紅化妝品衣服這些哪裡是文具呢',
+'3:53,3:56,你看一支原子筆這是文具',
+'3:56,3:59,可是你買了更多的化妝品啊',
+'4:00,4:01,人家忍不住嘛',
+'4:01,4:05,超級市場的東西很多和很便宜',
+'4:06,4:07,你說錯了',
+'4:07,4:09,這句話可以這麼說',
+'4:10,4:12,超級市場的東西',
+'4:12,4:15,不但多而且很便宜',
+'4:42,4:44,超級市場的東西',
+'4:44,4:46,不但多而且很便宜',
+'4:47,4:48,以這兩句話來說',
+'4:48,4:52,說話的人更強調很便宜這件事',
+'4:53,4:54,沒錯',
+'4:54,4:57,我就是知道東西很便宜',
+'4:57,4:59,才會去超級市場買東西',
+'5:00,5:03,我不但很聰明 而且很用功',
+'5:06,5:07,懂了嗎',
+'5:07,5:08,懂了',
+'5:08,5:11,到超級市場買東西',
+'5:11,5:13,不但方便 而且省時',
+'5:16,5:17,那當然',
+'5:17,5:21,今天不但而且的用法學會了嗎'
+    ];
+
+    function set_record() {
+
+        let my_target = document.getElementById('list-item');
+        for (let item of record) {
+            let tokens = item.split(',');
+            let s = get_time_sec(tokens[0]);
+            let e = get_time_sec(tokens[1]);
+            let diff = (e - s) < 3 ? 3 : (e - s);
+            //console.log( '===> '+ +' '+get_time_sec(tokens[1])) ;
+            //console.log(tokens) ;
+
+            ///////////////
+            let content = '<div class="form-group"><div class="form-row" style="margin-bottom: 5px;"><div class="col-1">' +
+                '<button type="button" class="btn btn-outline-info btn-sm" onclick="seek(' + s + ',' + diff + ');">' +
+                '<i class="fas fa-play"></i></button></div><div class="col-11"> <label>' + get_mask_str(tokens[2]) +
+                '</label></div></div><div class="form-row"><div class="col-10"><input type="text" class="form-control"></div>' +
+                '<div class="col-2"><button type="button" data-ans="' + tokens[2].replace(/\s/g, '') + '" class="btn btn-danger" onclick="check_ans(this);" ><i class="fas fa-check-circle"></i></button></div></div></div>';
+
+            my_target.innerHTML += content;
+
+        }
+    }
+    function get_time_sec(str) {
+        let ts = str.split(':');
+        return parseInt(ts[0]) * 60 + parseInt(ts[1]);
+    }
+    function get_mask_str(str) {
+        if (str.length > 5) {
+            return str.substr(0, 2) + '...' + str.substr(str.length - 2, str.length);
+        } else {
+            return str.substr(0, 2) + '...';
+        }
+    }
+    function check_ans(ans) {
+        var answer = ans.getAttribute('data-ans');
+        var result = ans.parentElement.previousElementSibling.children[0].value;
+        result = result.replace(/\s/g, '');
+        if (answer == result) {
+            let par = ans.parentElement.parentElement.parentElement;
+            par.style.display = "none";
+        } else {
+            ans.innerHTML = '<i class="fas fa-times"></i>';
+        }
+    }
+    set_record();
+</script>
+
+</html>

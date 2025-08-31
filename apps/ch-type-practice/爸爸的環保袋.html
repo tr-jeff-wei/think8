@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>聽打練習 - 爸爸的環保袋</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/6ec3c90698.js" crossorigin="anonymous"></script>
+    <style>
+        .floating-block {
+            background: rgba(153, 205, 50, 0.99);
+            color: white;
+            width: 708px;
+            z-index: 100;
+            position: fixed;
+            top: 330px;
+            height: 50px;
+        }
+     
+    </style>
+</head>
+
+<body class="container" style="margin: 10px;max-width: 1250px">
+    <div class="floating-block">
+    </div>
+    <div class="row">
+        <div class="col">
+            <div id='player'>
+                <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/6UZOPofLoAI?controls=0" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe> -->
+            </div>
+        </div>
+        <div class="col">
+            <div style="margin-top: 10px;" id='list-item'>
+                
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</body>
+
+<script>
+    var stoptime = 5;
+    // 2. This code loads the IFrame Player API code asynchronously.
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // 3. This function creates an <iframe> (and YouTube player)
+    //    after the API code downloads.
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+            height: '398',
+            width: '707',
+            videoId: '52A4VM8YEOw',
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+
+    // 4. The API will call this function when the video player is ready.
+    function onPlayerReady(event) {
+        event.target.seekTo(1);
+        //event.target.playVideo();
+    }
+
+    // 5. The API calls this function when the player's state changes.
+    //    The function indicates that when playing a video (state=1),
+    //    the player should play for six seconds and then stop.
+    var done = false;
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+            setTimeout(stopVideo, stoptime * 1000);
+            done = true;
+        }
+    }
+    function stopVideo() {
+        //player.stopVideo();
+        player.pauseVideo();
+    }
+
+    function seek(ss, stops) {
+        player.playVideo();
+        player.seekTo(ss);
+        setTimeout(stopVideo, stops * 1000);
+
+    }
+
+
+    var record = [        
+    '0:12,0:13,來喔來喔',
+'0:13,0:14,新鮮的青菜',
+'0:15,0:16,一把20',
+'0:17,0:18,三把只要50',
+'0:18,0:19,賣完就沒有了',
+'0:20,0:21,快點來喔',
+'0:23,0:25,婉兒 我們去買幾把青菜吧',
+'0:29,0:31,老闆 給我三把青菜',
+'0:33,0:35,好好好 三把50 三把50',
+'0:40,0:43,老闆 再多給我一個大塑膠袋',
+'0:45,0:48,為什麼要多拿一個塑膠袋',
+'0:50,0:51,沒關係啦',
+'0:51,0:52,反正又不用錢',
+'0:52,0:54,來來來 先生 您的菜',
+'0:56,0:58,來 50元給你',
+'0:59,1:01,走吧 我們去買豆腐',
+'1:10,1:12,老闆 豆腐怎麼賣',
+'1:14,1:16,任選一盤只要30元',
+'1:16,1:17,要買要快喔',
+'1:19,1:20,我要這一盤',
+'1:20,1:23,對了 幫我分成兩個塑膠袋裝',
+'1:24,1:25,爸比',
+'1:25,1:29,為什麼要分成兩個塑膠袋裝啊',
+'1:30,1:32,這樣豆腐可以分兩次吃啊',
+'1:32,1:33,一次一袋',
+'1:33,1:34,比較方便嘛',
+'1:35,1:37,可是拿這麼多塑膠袋',
+'1:38,1:40,很不環保耶',
+'1:41,1:44,塑膠袋再拿去回收就好了啊',
+'1:56,1:58,幫我把這些豆腐拿去冰',
+'2:08,2:11,你怎麼把塑膠袋都丟到垃圾桶',
+'2:12,2:13,不然 要怎麼辦',
+'2:13,2:17,你明明自己說要回收的啊',
+'2:19,2:21,晚上我再拿去回收',
+'2:21,2:25,一定要喔 我會看著你',
+'2:38,2:39,垃圾車來了',
+'2:39,2:41,趕快拿塑膠袋去回收',
+'2:47,2:50,快點啦 垃圾車只停一下下',
+'2:50,2:52,晚了就來不及了',
+'2:53,2:55,不用急 一定來得及啦',
+'3:01,3:02,啊 來不及了',
+'3:04,3:08,那就 只好明天再丟了',
+'3:51,3:53,客廳怎麼淹水了',
+'3:59,4:00,我去外面看看',
+'4:07,4:09,怎麼會這樣',
+'4:15,4:18,爸比 你看啦',
+'4:18,4:20,都是你的塑膠袋啦',
+'4:23,4:26,不准你再帶塑膠袋回家了',
+'4:32,4:35,我已經受不了爸比的塑膠袋了',
+'4:37,4:39,爸比 你難道不知道',
+'4:39,4:42,塑膠袋不但無法自然分解',
+'4:42,4:46,焚燒後還會造成空氣污染',
+'4:46,4:48,更重要的是',
+'4:48,4:51,昨天還害我們家淹水',
+'4:52,4:54,對不起啦 婉兒',
+'4:55,4:57,以後爸比買菜的時候',
+'4:57,4:59,只能帶環保袋',
+'4:59,5:03,不能再拿一大堆塑膠袋回家了喔',
+'5:07,5:10,好好好 爸比知道了',
+'5:18,5:20,來來來青菜一把20',
+'5:20,5:23,三把50 快點來買啊',
+'5:24,5:26,老闆 給我三把青菜',
+'5:26,5:28,好好好',
+'5:31,5:33,對了 要一起放進大塑膠袋裡',
+'5:34,5:34,對不對啊',
+'5:35,5:37,不用 不用',
+'5:37,5:39,通通放進這裡就可以了',
+'5:39,5:44,哇 自備購物袋 這樣很環保喔',
+'5:44,5:46,這是我女兒送我的',
+'5:46,5:49,她說要用行動愛地球',
+'5:49,5:52,老闆你以後也少給客人塑膠袋吧',
+'5:53,5:55,嗯 對啦 對啦',
+'5:55,5:57,自備購物袋比較好啦',
+'5:58,5:59,等一下',
+'5:59,6:02,先生 看你女兒貼心又環保',
+'6:03,6:05,我想一定是你這個老爸教得好',
+'6:05,6:08,來來來 免費再送你一把蔥',
+'6:08,6:10,這個',
+'6:11,6:14,應該是 我女兒教得好才對',
+'6:14,6:17,嘻嘻 呵呵',
+'6:23,6:26,大家都知道環保的重要',
+'6:26,6:30,但是 能夠真正做到的人卻很少',
+'6:30,6:34,其實 只要一個小小的動作',
+'6:34,6:36,就能改變地球喔',
+'6:36,6:40,環保是一種習慣 隨手做環保',
+'6:40,6:44,環保就在我們每天的生活裡喔'
+    ];
+
+    function set_record() {
+
+        let my_target = document.getElementById('list-item') ;
+        for (let item of record) {
+            let tokens = item.split(',');
+            let s = get_time_sec(tokens[0]) ;
+            let e = get_time_sec(tokens[1]) ;
+            let diff = (e-s)<3?3:(e-s) ;
+            //console.log( '===> '+ +' '+get_time_sec(tokens[1])) ;
+            //console.log(tokens) ;
+
+            ///////////////
+            let content = '<div class="form-group"><div class="form-row" style="margin-bottom: 5px;"><div class="col-1">'+
+            '<button type="button" class="btn btn-outline-info btn-sm" onclick="seek('+s+','+diff+');">'+
+            '<i class="fas fa-play"></i></button></div><div class="col-11"> <label>'+get_mask_str(tokens[2])+
+            '</label></div></div><div class="form-row"><div class="col-10"><input type="text" class="form-control"></div>'+
+            '<div class="col-2"><button type="button" data-ans="' + tokens[2].replace(/\s/g, '') + '" class="btn btn-danger" onclick="check_ans(this);" ><i class="fas fa-check-circle"></i></button></div></div></div>';
+
+            my_target.innerHTML += content ;
+
+        }
+    }
+    function get_time_sec( str ){
+        let ts = str.split(':') ;        
+        return parseInt(ts[0])*60+parseInt(ts[1]) ;
+    }
+    function get_mask_str( str ){
+        if( str.length >5 ){
+            return str.substr(0,2)+'...'+str.substr( str.length-2 , str.length) ;
+        }else{
+            return str.substr(0,2)+'...';
+        }
+    }
+    function check_ans( ans ){
+            var answer = ans.getAttribute('data-ans');
+			var result = ans.parentElement.previousElementSibling.children[0].value ;
+            result = result.replace(/\s/g, '') ;
+            if( answer == result ){
+                let par = ans.parentElement.parentElement.parentElement;
+                par.style.display = "none";
+            }else{
+                ans.innerHTML = '<i class="fas fa-times"></i>' ;
+            }
+    }
+    set_record();
+</script>
+
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>聽打練習 - 溝通的遊戲</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/6ec3c90698.js" crossorigin="anonymous"></script>
+    <style>
+        .floating-block {
+            background: rgba(153, 205, 50, 0.99);
+            color: white;
+            width: 708px;
+            z-index: 100;
+            position: fixed;
+            top: 330px;
+            height: 50px;
+        }
+     
+    </style>
+</head>
+
+<body class="container" style="margin: 10px;max-width: 1250px">
+    <div class="floating-block">
+    </div>
+    <div class="row">
+        <div class="col">
+            <div id='player'>
+                <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/6UZOPofLoAI?controls=0" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe> -->
+            </div>
+        </div>
+        <div class="col">
+            <div style="margin-top: 10px;" id='list-item'>
+                
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</body>
+
+<script>
+    var stoptime = 5;
+    // 2. This code loads the IFrame Player API code asynchronously.
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // 3. This function creates an <iframe> (and YouTube player)
+    //    after the API code downloads.
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+            height: '398',
+            width: '707',
+            videoId: 'b-UQa0v7XRQ',
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+
+    // 4. The API will call this function when the video player is ready.
+    function onPlayerReady(event) {
+        event.target.seekTo(1);
+        //event.target.playVideo();
+    }
+
+    // 5. The API calls this function when the player's state changes.
+    //    The function indicates that when playing a video (state=1),
+    //    the player should play for six seconds and then stop.
+    var done = false;
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+            setTimeout(stopVideo, stoptime * 1000);
+            done = true;
+        }
+    }
+    function stopVideo() {
+        //player.stopVideo();
+        player.pauseVideo();
+    }
+
+    function seek(ss, stops) {
+        player.playVideo();
+        player.seekTo(ss);
+        setTimeout(stopVideo, stops * 1000);
+
+    }
+
+
+    var record = [        
+        '0:10,0:11,對了 這個週末',
+        '0:12,0:14,妳覺得我們可以去哪裡玩呢',
+        // '0:14,0:15,我想想喔 婉兒',
+        '0:20,0:21,快上車吧',
+        '0:26,0:28,小雯 星期六我們去溜冰',
+        // '0:28,0:30,喔 好啊',
+        '0:40,0:41,今日公休',
+        '0:42,0:44,怎麼會這樣',
+        '0:46,0:48,婉兒 我已經在溜冰場了',
+        '0:48,0:50,可是今天公休耶',
+        '0:51,0:53,妳為什麼在溜冰場啊',
+        '0:54,0:56,我們不是約好星期六溜冰嗎',
+        '0:57,1:01,喔 我的意思是約下個星期六喔',
+        '1:01,1:02,因為溜冰場',
+        '1:02,1:05,每個月的第一個星期六都公休',
+        '1:05,1:06,我以為妳知道',
+        '1:07,1:10,喔 那可能是我誤會妳的意思了',
+        '1:11,1:12,對不起 小雯',
+        '1:12,1:14,都是我沒有說清楚',
+        '1:20,1:21,那個包包',
+        '1:27,1:30,婉兒 妳是不是很喜歡這個小包包啊',
+        '1:33,1:35,喔 是滿可愛的啦',
+        // '1:46,1:46,婉兒',
+        '1:47,1:49,我看妳剛剛拿著這個小包包一直笑',
+        '1:50,1:51,應該是很喜歡吧',
+        '1:52,1:53,所以我就用零用錢買了',
+        '1:54,1:55,送給妳當生日禮物',
+        '1:56,1:57,祝妳生日快樂',
+        '1:59,2:00,小強 謝謝你',
+        '2:02,2:02,其實',
+        '2:03,2:05,我是因為覺得小包包上面的卡通人物',
+        '2:06,2:08,長得跟你很像 所以才',
+        // '2:10,2:11,什麼 這',
+        '2:19,2:20,但還是謝謝你的禮物啦',
+        '2:34,2:36,這個呢 好看嗎',
+        // '2:37,2:39,No No No 不好 不好 不好',
+        '2:40,2:40,如果我是妳',
+        '2:41,2:42,絕對不會戴這個去參加妳姑姑的婚禮',
+        '2:43,2:44,一點也不好看',
+        '2:46,2:47,還是不好看嗎',
+        '2:49,2:51,已經試過這麼多髮飾了',
+        '2:52,2:53,真的都沒有一個好看的嗎',
+        '2:55,2:56,還是我長得不可愛',
+        '2:57,2:58,所以戴什麼都不好看',
+        '3:00,3:01,佩芳 我不是這個意思啦',
+        '3:02,3:04,我只是想幫妳找出最漂亮的髮飾',
+        '3:05,3:08,討厭 我怎麼老是被人誤會啊',
+        '3:12,3:12,妳是誰',
+        '3:13,3:15,妳好 我是溝通小精靈',
+        '3:16,3:18,婉兒 妳和朋友 家人',
+        '3:19,3:21,已經出現了所謂的溝通障礙',
+        '3:22,3:24,現在就讓時光倒流',
+        '3:25,3:27,看看到底是哪裡出了問題吧',
+        '3:31,3:34,當婉兒約小雯星期六溜冰時',
+        '3:34,3:35,因為忙著上車',
+        '3:36,3:39,又以為小雯知道溜冰場公休的事',
+        '3:40,3:42,所以沒有講清楚日期跟時間',
+        '3:43,3:44,另一方面',
+        '3:45,3:46,小雯也理所當然地',
+        '3:47,3:48,以為是約當週星期六',
+        '3:49,3:52,沒有再度確認 才會造成溝通不良',
+        '3:53,3:54,那應該要怎麼做呢',
+        '3:55,3:56,和人約定時',
+        '3:57,4:00,日期 時間 地點一定要講清楚',
+        '4:01,4:02,也可以在前一天再度確認',
+        '4:03,4:05,就不會有等不到人的情況出現啦',
+        '4:09,4:10,小強因為看見',
+        '4:11,4:13,婉兒拿著卡通小包包又看又笑',
+        '4:14,4:16,便以自己的觀察詢問對方的想法',
+        '4:17,4:18,在沒有得到確定的答案',
+        '4:19,4:22,就做出自己認為正確的決定',
+        '4:23,4:24,單方面期待婉兒接受',
+        '4:25,4:26,反而弄巧成拙',
+        '4:27,4:28,造成雙方尷尬的情況',
+        '4:30,4:31,那應該要怎麼做呢',
+        '4:32,4:34,嘗試不要以自己預想好的答案',
+        '4:35,4:36,去詢問對方的意思',
+        '4:37,4:38,如果對方回答不清楚',
+        '4:39,4:41,可以再次詢問確認',
+        '4:42,4:44,不必急著認定對方的答案',
+        '4:44,4:46,與自己心中的想法是一致的',
+        '4:47,4:48,才不會造成誤會喔',
+        '4:52,4:53,至於佩芳的髮飾',
+        '4:54,4:57,我相信婉兒是想給佩芳衷心的建議',
+        '4:58,5:00,卻因為用詞和表達方式的不適當',
+        '5:01,5:04,讓佩芳誤以為是在批評嫌棄自己',
+        '5:04,5:05,我應該怎麼說',
+        '5:06,5:07,才不會讓佩芳誤會呢',
+        '5:08,5:09,妳可以說',
+        '5:09,5:10,佩芳妳很可愛',
+        '5:11,5:12,這件髮飾也很漂亮',
+        '5:13,5:15,但如果換成其他顏色或款式',
+        '5:16,5:18,說不定會更適合妳喔',
+        '5:19,5:20,這樣聽起來好多了',
+        '5:21,5:21,我懂了',
+        '5:22,5:24,委婉 但是真心的說出自己的想法',
+        '5:25,5:26,現在 大家都知道',
+        '5:27,5:28,怎麼完成這個溝通的遊戲了嗎',
+        '5:29,5:32,以後我會好好把話說清楚',
+        '5:33,5:35,我也會把話好好聽清楚',
+        '5:37,5:39,我也會把問題好好問清楚',
+        '5:39,5:40,溝通是一個需要',
+        '5:41,5:43,雙方一起用心合作的遊戲',
+        '5:44,5:45,只要好好練習',
+        '5:45,5:47,就可以減少誤會',
+        '5:47,5:50,再也不怕和家人 朋友溝通不良囉',
+        '5:53,5:54,想要有良好的溝通',
+        '5:55,5:55,其實很簡單',
+        '5:56,5:57,只要說的一方',
+        '5:58,5:59,把話講得再清楚一點',
+        // '6:00,6:01,聽的一方',
+        '6:01,6:02,如有不清楚的話',
+        '6:03,6:06,應該詢問 再確認對方的意思',
+        '6:07,6:09,不論說話還是聽話的人',
+        '6:09,6:10,都需要用心',
+        '6:11,6:14,才能一起完成這個溝通的遊戲喔'
+    ];
+
+    function set_record() {
+
+        let my_target = document.getElementById('list-item') ;
+        for (let item of record) {
+            let tokens = item.split(',');
+            let s = get_time_sec(tokens[0]) ;
+            let e = get_time_sec(tokens[1]) ;
+            let diff = (e-s)<3?3:(e-s) ;
+            //console.log( '===> '+ +' '+get_time_sec(tokens[1])) ;
+            //console.log(tokens) ;
+
+            ///////////////
+            let content = '<div class="form-group"><div class="form-row" style="margin-bottom: 5px;"><div class="col-1">'+
+            '<button type="button" class="btn btn-outline-info btn-sm" onclick="seek('+s+','+diff+');">'+
+            '<i class="fas fa-play"></i></button></div><div class="col-11"> <label>'+get_mask_str(tokens[2])+
+            '</label></div></div><div class="form-row"><div class="col-10"><input type="text" class="form-control"></div>'+
+            '<div class="col-2"><button type="button" data-ans="' + tokens[2].replace(/\s/g, '') + '" class="btn btn-danger" onclick="check_ans(this);" ><i class="fas fa-check-circle"></i></button></div></div></div>';
+
+            my_target.innerHTML += content ;
+
+        }
+    }
+    function get_time_sec( str ){
+        let ts = str.split(':') ;        
+        return parseInt(ts[0])*60+parseInt(ts[1]) ;
+    }
+    function get_mask_str( str ){
+        if( str.length >5 ){
+            return str.substr(0,2)+'...'+str.substr( str.length-2 , str.length) ;
+        }else{
+            return str.substr(0,2)+'...';
+        }
+    }
+    function check_ans( ans ){
+            var answer = ans.getAttribute('data-ans');
+			var result = ans.parentElement.previousElementSibling.children[0].value ;
+            result = result.replace(/\s/g, '') ;
+            if( answer == result ){
+                let par = ans.parentElement.parentElement.parentElement;
+                par.style.display = "none";
+            }else{
+                ans.innerHTML = '<i class="fas fa-times"></i>' ;
+            }
+    }
+    set_record();
+</script>
+
+</html>

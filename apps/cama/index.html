@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>咖麻</title>
+
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css"
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        td {
+            line-height: 1.5;
+            font-size: 26px;
+        }
+
+        th {
+            line-height: 1.5;
+            font-size: 16px;
+
+        }
+
+        input {
+            color: brown;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid" style="margin-top: 12px;">
+        <div class="row">
+
+            <div class="col-md-10">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+
+
+                    <!-- Table -->
+                    <table class="table">
+
+                        <thead>
+                            <tr style="background-color:rgb(222, 222, 222);">
+                                <th>品項</th>
+                                <th>數量</th>
+                                <th style="text-align: right;">總計</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>雞腿咖哩 $89</td>
+                                <td><input id="i_cali" type="number" style="width:45px"></td>
+                                <td style="color: rgb(156, 78, 78);text-align: right;" style="width:250px" id="o_cali">0
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>麻婆豆腐 $89</td>
+                                <td><input id="i_dofu" type="number" style="width:45px"></td>
+                                <td style="color: rgb(156, 78, 78);text-align: right;" id="o_dofu">0</td>
+                            </tr>
+                            <tr>
+                                <td>雙拼 $109</td>
+                                <td><input id="i_dou" type="number" style="width:45px"></td>
+                                <td style="color: rgb(156, 78, 78);text-align: right;" id="o_dou">0</td>
+                            </tr>
+                            <tr>
+                                <td>和風涼麵 $69</td>
+                                <td><input id="i_nod" type="number" style="width:45px"></td>
+                                <td style="color: rgb(156, 78, 78);text-align: right;" id="o_nod">0</td>
+                            </tr>
+                            <tr style="color:red ;background-color:rgb(242, 242, 242);">
+                                <td>總計</td>
+                                <td></td>
+                                <td style="color:red;text-align: right;" id="o_sum">0</td>
+                            </tr>
+                            <tr style="color:blue ;">
+                                <td style="text-align: right;">收現</td>
+                                <td></td>
+                                <td><input id="i_rec" type="number" style="width:80px;color:blue ;"></td>
+                            </tr>
+                            <tr style="color:brown ;">
+                                <td style="color:green;text-align: right;">找零</td>
+                                <td></td>
+                                <td style="color:green;text-align: right;" id="o_change">0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-10" style="text-align:center ;">
+                <button class="btn-warning btn-lg" onclick="reset();"> C </button>
+                <button class="btn-primary btn-lg" style="width:250px"
+                    onclick="sum();">計 算</button>
+                </div>
+        </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+
+</body>
+<script>
+
+    function sum() {
+        let s = 0;
+        let v1= document.getElementById('i_cali').value * 89;
+        document.getElementById('o_cali').textContent = v1 ;
+        s+= v1;
+        
+        v1= document.getElementById('i_dofu').value * 89;
+        document.getElementById('o_dofu').textContent = v1 ;
+        s+= v1;
+
+        v1= document.getElementById('i_dou').value * 109;
+        document.getElementById('o_dou').textContent = v1 ;
+        s+=v1 ;
+
+        v1 = document.getElementById('i_nod').value * 69;
+        document.getElementById('o_nod').textContent = v1 ;
+        s+=v1;
+
+        document.getElementById('o_sum').textContent = s;
+
+
+        let rec_money = document.getElementById('i_rec').value
+        document.getElementById('o_change').textContent = (rec_money - s);
+    }
+
+    function reset(){
+        let input_items=['i_cali','i_dofu','i_dou','i_nod','i_rec'];
+        input_items.forEach(element => {
+            document.getElementById(element).value='';
+        });
+        sum();
+    }
+    document.getElementById('i_cali').addEventListener('change', (event) => {
+       
+        sum();
+    });
+    document.getElementById('i_dofu').addEventListener('change', (event) => {
+        sum();
+
+    });
+    document.getElementById('i_dou').addEventListener('change', (event) => {
+        sum();
+
+    });
+    document.getElementById('i_nod').addEventListener('change', (event) => {
+        sum();
+    });
+    document.getElementById('i_rec').addEventListener('change', (event) => {
+        sum();
+    });
+
+</script>
+
+</html>

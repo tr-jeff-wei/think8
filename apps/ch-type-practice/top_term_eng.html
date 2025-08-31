@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Top Term - Practice</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="css/clean-blog.min.css" rel="stylesheet">
+      <link href="css/notosanstc.css" rel="stylesheet">
+
+      <style>
+          @import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
+          body {
+            font-family: 'Noto Sans TC', sans-serif;
+          }
+          .word{
+              font-size: 6em;
+          }
+          .answer{
+              font-family: 'Noto Sans TC', sans-serif;
+              font-size: 6em;
+          }
+        
+      
+      </style>
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand" onclick="add_data();">Save</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#" id='ok'>000</a>
+            </li>
+            <li class="nav-item" >
+              <a class="nav-link" href="#" id='bad' style='color: red'>000</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('img/800724.jpg')">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="page-heading">
+              <div class='word' id='word'></div>
+              <span class="subheading"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-10 mx-auto">
+          <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
+          <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
+          <!-- NOTE: To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
+          <div>
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls">
+                <label></label>
+                <input type="text" class="form-control" id="my_answer" style="font-family: 'Noto Sans TC', sans-serif;font-size: 4em;">   
+              </div>
+            </div>            
+            <br>
+            <div id="success"></div>
+            <div class="form-group">
+              <button class="btn btn-secondary" id="btn" onclick="send();">Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <ul class="list-inline text-center">
+              <li class="list-inline-item">
+                <a href="#">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+            <p class="copyright text-muted">Copyright &copy; Your Website 2017</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper/popper.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/clean-blog.min.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase.js"></script>
+
+      <script>
+          
+
+          var config = {
+            apiKey: "AIzaSyBaINk2-3m_qieit3noR6KdKKm3qRAfEhI",
+            authDomain: "typing-counter.firebaseapp.com",
+            databaseURL: "https://typing-counter.firebaseio.com",
+            projectId: "typing-counter",
+            storageBucket: "typing-counter.appspot.com",
+            messagingSenderId: "48164465117"
+          };
+            
+            // 初始化 app
+            firebase.initializeApp(config);
+            // 取得資料庫物件
+            var database = firebase.database() ;
+            
+            
+            var basic_path= "/chung-ze/top_term_eng" ;
+            var all_data={} ;                  
+          
+            var w ;
+          
+            $( document ).ready(function() {
+
+                // Get the input field
+                var input_ans = document.getElementById("my_answer");
+                // Execute a function when the user releases a key on the keyboard
+                input_ans.addEventListener("keyup", check);
+                
+                w = prepare() ;
+                
+                setWord() ;
+                get_data();
+            });      
+          
+          function check(event){
+                event.preventDefault();
+                // Number 13 is the "Enter" key on the keyboard
+                if (event.keyCode === 13) {
+                    
+                    var ans = document.getElementById('my_answer').value.trim() ;
+                    var word = document.getElementById('word').textContent.trim() ;
+                    
+                    if( ans == word ){
+                        
+                        document.getElementById('ok').textContent = (parseInt( document.getElementById('ok').textContent )+1) ;
+                        addCount(word) ;
+                        
+                    }else{
+                        
+                        document.getElementById('bad').textContent = (parseInt( document.getElementById('bad').textContent )-1) ;
+                        
+                    }
+                    
+                    document.getElementById('my_answer').value = '';
+                    setWord() ;      
+                    
+                    
+                }
+          }
+          
+          function addCount(term){
+              if( all_data == null ){
+                  all_data ={} ;
+              }
+              if( all_data[term] == null ){
+                  all_data[term] = 1 ;
+              } else{
+                  all_data[term] = parseInt( all_data[term]) +1 ;
+              }
+          }
+          
+          
+          function send(){
+            //alert( document.getElementById("my_answer").value ) ;
+          }
+          
+          function setWord(){
+              var idx = Math.floor( Math.random()* w.length) ;
+              
+              while( w[idx].length <7){
+                  idx = Math.floor( Math.random()* w.length) ;
+              }              
+              
+              document.getElementById('word').textContent = w[idx] ;
+              console.log(idx+"-->"+w[idx]) ;
+          }
+          
+          function prepare(){
+             return [ "that",
+"your",
+"with",
+"have",
+"this",
+"from",
+"they",
+"more",
+"will",
+"some",
+"there",
+"what",
+"about",
+"which",
+"when",
+"their",
+"also",
+"many",
+"most",
+"people",
+"other",
+"time",
+"these",
+"like",
+"into",
+"than",
+"them",
+"make",
+"because",
+"such",
+"through",
+"work",
+"even",
+"different",
+"film",
+"just",
+"only",
+"used",
+"good",
+"water",
+"been",
+"need",
+"should",
+"very",
+"history",
+"often",
+"well",
+"know",
+"were",
+"then",
+"first",
+"would",
+"money",
+"each",
+"over",
+"world",
+"information",
+"find",
+"where",
+"much",
+"take",
+"want",
+"important",
+"family",
+"those",
+"example",
+"while",
+"look",
+"government",
+"before",
+"help",
+"between",
+"however",
+"business",
+"great",
+"being",
+"another",
+"health",
+"same",
+"study",
+"game",
+"might",
+"think",
+"free",
+"right",
+"still",
+"system",
+"after",
+"computer",
+"best",
+"must",
+"life",
+"since",
+"could",
+"does",
+"during",
+"learn",
+"around",
+"usually",
+"form",
+"meat",
+"place",
+"become",
+"number",
+"public",
+"read",
+"keep",
+"part",
+"start",
+"year",
+"every",
+"field",
+"large",
+"once",
+"available",
+"down",
+"give",
+"fish",
+"human",
+"both",
+"local",
+"sure",
+"something",
+"without",
+"come",
+"back",
+"better",
+"general",
+"process",
+"heat",
+"thanks",
+"specific",
+"enough",
+"long",
+"hand",
+"popular",
+"small",
+"though",
+"experience",
+"include",
+"music",
+"person",
+"really",
+"although",
+"thank",
+"book",
+"early",
+"reading",
+"method",
+"never",
+"less",
+"play",
+"able",
+"data",
+"feel",
+"high",
+"point",
+"type",
+"whether",
+"food",
+"understanding",
+"here",
+"home",
+"certain",
+"economy",
+"little",
+"theory",
+"tonight",
+"under",
+"value",
+"always",
+"body",
+"common",
+"market",
+"bird",
+"guide",
+"provide",
+"change",
+"interest",
+"literature",
+"sometimes",
+"problem",
+"next",
+"create",
+"simple",
+"software",
+"state",
+"together",
+"control",
+"knowledge",
+"power",
+"radio",
+"ability",
+"basic",
+"course",
+"economics",
+"hard",
+"company",
+"known",
+"love",
+"past",
+"price",
+"size",
+"away",
+"internet",
+"possible",
+"television",
+"three",
+"understand",
+"various",
+"yourself",
+"card",
+"difficult",
+"including",
+"list",
+"mind",
+"particular",
+"real",
+"science",
+"trade",
+"consider",
+"either",
+"library",
+"likely",
+"nature",
+"fact",
+"line",
+"product",
+"care",
+"group",
+"idea",
+"risk",
+"several",
+"someone",
+"temperature",
+"united",
+"word",
+"force",
+"light",
+"simply",
+"today",
+"training",
+"until",
+"major",
+"name",
+"personal",
+"school",
+"current",
+"generally",
+"historical",
+"investment",
+"left",
+"national",
+"amount",
+"level",
+"order",
+"practice",
+"research",
+"sense",
+"service",
+"area",
+"instead",
+"least",
+"natural",
+"physical",
+"piece",
+"show",
+"society",
+"check",
+"choose",
+"develop",
+"second",
+"useful",
+"activity",
+"boss",
+"short",
+"story",
+"call",
+"industry",
+"last",
+"media",
+"mental",
+"move",
+"sport",
+"thing",
+"actually",
+"against",
+"house",
+"page",
+"remember",
+"term",
+"test",
+"within",
+"along",
+"answer",
+"increase",
+"oven",
+"quite",
+"scared",
+"single",
+"sound",
+"again",
+"community",
+"definition",
+"focus",
+"individual",
+"matter",
+"safety",
+"turn",
+"everything",
+"kind",
+"quality",
+"soil",
+"board",
+"development",
+"guard",
+"hold",
+"language",
+"later",
+"main",
+"offer",
+"picture",
+"potential",
+"professional",
+"rather",
+"access",
+"additional",
+"almost",
+"especially",
+"garden",
+"international",
+"lower",
+"management",
+"open",
+"player",
+"range",
+"rate",
+"reason",
+"travel",
+"variety",
+"video",
+"week",
+"above",
+"according",
+"cook",
+"determine",
+"future",
+"site",
+"alternative",
+"demand",
+"ever",
+"exercise",
+"following",
+"image",
+"quickly",
+"special",
+"working",
+"case",
+"cause",
+"coast",
+"probably",
+"security",
+"true",
+"whole",
+"action",
+"among",
+"boat",
+"country",
+"dance",
+"exam",
+"excuse",
+"grow",
+"movie",
+"organization",
+"record",
+"result",
+"section",
+"across",
+"already",
+"below",
+"building",
+"mouse",
+"allow",
+"cash",
+"class",
+"clear",
+"easy",
+"emotional",
+"equipment",
+"live",
+"nothing",
+"period",
+"physics",
+"plan",
+"store",
+"analysis",
+"cold",
+"commercial",
+"directly",
+"full",
+"involved",
+"itself",
+"policy",
+"political",
+"purchase",
+"series",
+"side",
+"subject",
+"supply",
+"therefore",
+"thought",
+"basis",
+"boyfriend",
+"deal",
+"direction",
+"mean",
+"primary",
+"space",
+"strategy",
+"technology",
+"worth",
+"army",
+"camera",
+"fall",
+"freedom",
+"paper",
+"rule",
+"similar",
+"stock",
+"weather",
+"bring",
+"chance",
+"environment",
+"everyone",
+"figure",
+"improve",
+"model",
+"necessary",
+"positive",
+"produce",
+"search",
+"source",
+"beginning",
+"child",
+"earth",
+"else",
+"healthy",
+"instance",
+"maintain",
+"month",
+"present",
+"program",
+"spend",
+"talk",
+"truth",
+"upset",
+"begin",
+"chicken",
+"close",
+"creative",
+"design",
+"feature",
+"financial",
+"head",
+"marketing",
+"material",
+"medical",
+"purpose",
+"question",
+"rock",
+"salt",
+"tell",
+"themselves",
+"traditional",
+"university",
+"writing",
+"article",
+"birth",
+"cost",
+"department",
+"difference",
+"drive",
+"exist",
+"federal",
+"goal",
+"green",
+"late",
+"news",
+"object",
+"scale",
+"support",
+"tend",
+"thus",
+"audience",
+"enjoy",
+"entire",
+"fishing",
+"glad",
+"growth",
+"income"] ;
+              
+              
+              
+              
+              
+          }
+              
+            function get_data(){
+                // 資料位置
+                var ref = database.ref(  basic_path ) ;
+                // 建立資料更新時的方法
+                ref.on( 'value' , read_data);                
+                function read_data( snapshot ){
+                    all_data = snapshot.val() ;
+                    console.log( all_data) ;
+                }                
+            }             
+          
+            function add_data(){
+                                
+                // 資料位置
+                var ref = database.ref( basic_path);
+                // 設置資料
+                ref.set(all_data) ;               
+                alert('OK');
+            }
+          
+        
+          
+          
+      </script>
+      
+  </body>
+
+</html>

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" >    
+      <style>
+          @import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
+          body {
+            font-family: 'Noto Sans TC', sans-serif;
+          }
+      </style>      
+
+    <title>詞頻內容檢視</title>
+  </head>
+  <body>
+      
+     
+        <nav class="navbar fixed-top navbar-light bg-light">
+            
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                詞頻檢視項目
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" onclick='switch_type("listen_merge");'>聽-字詞：listen_merge</a>
+                    <a class="dropdown-item" onclick='switch_type("listen_sent");'>聽-句子：listen_sent</a>
+                    <a class="dropdown-item" onclick='switch_type("top_term");'>打字-詞彙中：top_term</a>
+                    <a class="dropdown-item" onclick='switch_type("top_term_eng");'>打字-詞彙英：top_term_eng</a>
+              </div>
+            </div>            
+        </nav>
+        <div class="container" style='margin-top: 150px;'>
+            <table id='my_table' class="cell-border compact stripe">
+            </table>
+        </div>
+        
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-database.js"></script>
+        <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script>
+            
+            
+            var database ;
+            var basic_path= '' ;
+            var all_data={} ;     
+            var table = null ;
+      
+            $(document).ready(function(){                
+                prepareFB() ;                
+            });
+            
+
+            
+            function get_data(){
+                    // 資料位置
+                    var ref = database.ref(  basic_path ) ;
+                    // 建立資料更新時的方法
+                    ref.once( 'value' , read_data);                
+                    function read_data( snapshot ){
+                        all_data = snapshot.val() ;
+                        console.log( all_data) ;
+                        build_table();
+                    }                
+                }
+            
+        
+            
+            function prepareFB(){
+                
+                var config = {
+                apiKey: "AIzaSyBaINk2-3m_qieit3noR6KdKKm3qRAfEhI",
+                authDomain: "typing-counter.firebaseapp.com",
+                databaseURL: "https://typing-counter.firebaseio.com",
+                projectId: "typing-counter",
+                storageBucket: "typing-counter.appspot.com",
+                messagingSenderId: "48164465117"
+                };
+
+                // 初始化 app
+                firebase.initializeApp(config);
+                // 取得資料庫物件
+                database = firebase.database() ;
+                
+            }
+            function switch_type( t_type ){
+                basic_path= '/chung-ze/' ;
+                switch( t_type ){
+                    case 'listen_merge':
+                        basic_path+=t_type ;
+                        break ;
+                    case 'listen_sent':
+                        basic_path+=t_type ;
+                        break;
+                    case 'top_term' :
+                        basic_path+=t_type ;
+                        break ;
+                    case 'top_term_eng' :
+                        basic_path+=t_type ;
+                        break ;
+                    default:
+                        basic_path+="no" ;
+                        break;
+                }
+                
+                get_data() ;
+                
+                
+            }
+      
+            function build_table(){
+                if( all_data != null ){
+                    var c=1 ;                    
+                    var my_data = [] ;
+                    for( var k in all_data ){
+                        //console.log( k+'  >>  '+all_data[k]) ;                    
+                        var t = k.startsWith('-')?'-':'+';
+                        my_data.push(
+                            {
+                                '#':c , 
+                                '+/-':t , 
+                                'term' : k.replace('-','') ,
+                                'count' : all_data[k] 
+                            }) ;
+                        c++ ;
+                    }
+                    
+                    if( table!=null){
+                        table.destroy();
+                    }
+                    
+                    table = $('#my_table').DataTable(
+                        {   
+                            data:my_data , 
+                            paging: false,
+                            columns: [
+                                { data: '#' },
+                                { data: '+/-' },
+                                { data: 'term' },
+                                { data: 'count' }
+                            ]
+                        }
+                    );
+                }
+            }
+      
+        </script>
+      
+      
+  </body>
+</html>

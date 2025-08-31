@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>聽打練習 - L4 現在幾點鐘</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/6ec3c90698.js" crossorigin="anonymous"></script>
+    <style>
+        .floating-block {
+            background: rgba(153, 205, 50, 0.99);
+            color: white;
+            width: 708px;
+            z-index: 100;
+            position: fixed;
+            top: 330px;
+            height: 50px;
+        }
+    </style>
+</head>
+
+<body class="container" style="margin: 10px;max-width: 1250px">
+    <div class="floating-block">
+    </div>
+    <div class="row">
+        <div class="col">
+            <div id='player'>
+                <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/6UZOPofLoAI?controls=0" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe> -->
+            </div>
+        </div>
+        <div class="col">
+            <div style="margin-top: 10px;" id='list-item'>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</body>
+
+<script>
+    var stoptime = 5;
+    // 2. This code loads the IFrame Player API code asynchronously.
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // 3. This function creates an <iframe> (and YouTube player)
+    //    after the API code downloads.
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+            height: '398',
+            width: '707',
+            videoId: 'PnVqj-gQQHs',
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+
+    // 4. The API will call this function when the video player is ready.
+    function onPlayerReady(event) {
+        event.target.seekTo(1);
+        //event.target.playVideo();
+    }
+
+    // 5. The API calls this function when the player's state changes.
+    //    The function indicates that when playing a video (state=1),
+    //    the player should play for six seconds and then stop.
+    var done = false;
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+            setTimeout(stopVideo, stoptime * 1000);
+            done = true;
+        }
+    }
+    function stopVideo() {
+        //player.stopVideo();
+        player.pauseVideo();
+    }
+
+    function seek(ss, stops) {
+        player.playVideo();
+        player.seekTo(ss);
+        setTimeout(stopVideo, stops * 1000);
+
+    }
+
+
+    var record = [
+        '0:07,0:08,現在幾點鐘',
+        '0:09,0:12,現在是中午十二點十五分',
+        '0:12,0:15,您找我出來有事嗎',
+        '0:15,0:17,當然您忙嗎',
+        '0:17,0:19,我還在工作',
+        '0:19,0:22,你一天工作幾個小時呢',
+        '0:22,0:24,超過十個小時呢',
+        '0:28,0:31,請問現在幾點鐘',
+        '0:31,0:34,現在已經十二點半了',
+        '0:34,0:38,對不起我晚了十五分鐘',
+        '0:38,0:39,沒關係',
+        '0:40,0:43,對了小月想認識台灣文化',
+        '0:43,0:45,你可以介紹幾個地方嗎',
+        '0:46,0:48,要去哪兒',
+        '0:48,0:50,我們去山上喝茶',
+        '0:50,0:51,什麼時候',
+        '0:51,0:53,明天下午三點鐘',
+        '1:01,1:03,手錶放在家裡',
+        '1:03,1:04,怎麼辦呢',
+        '1:05,1:07,請問現在幾點鐘',
+        '1:10,1:11,我的錶停了',
+        '1:12,1:15,請問現在幾點了',
+        '1:15,1:17,不知道時間的時候',
+        '1:17,1:19,我們該怎麼問呢',
+        '1:19,1:22,請問現在幾點鐘',
+        '1:22,1:25,這一刻的 對話一定用得上',
+        '1:36,1:38,請問現在幾點了',
+        '1:40,1:43,現在是上午十點一刻',
+        '1:45,1:48,十點一刻是十點幾分呢',
+        '1:49,1:51,十點十五分',
+        '1:53,1:55,一刻鐘是十五分鐘',
+        '1:57,1:59,您每天幾點鐘下班呢',
+        '2:00,2:04,我每天下午五點半下班',
+        '2:05,2:08,一天要工作幾個小時呢',
+        '2:09,2:12,一天工作八個小時',
+        '2:23,2:24,現在',
+        '2:26,2:26,幾',
+        '2:28,2:29,點鐘',
+        '2:30,2:31,上午',
+        '2:33,2:35,刻鐘',
+        '2:38,2:40,分鐘',
+        '2:41,2:43,每天',
+        '2:44,2:45,下午',
+        '2:46,2:47,半',
+        '2:49,2:50,工作',
+        '2:56,2:58,你要問時間',
+        '2:59,3:01,這時候我們可以說',
+        '3:01,3:03,請問現在幾點了',
+        '3:06,3:08,考考你',
+        '3:07,3:10,這時候你要怎麼回答呢',
+        '3:11,3:14,要怎麼回答呢',
+        '3:14,3:16,正確的說法',
+        '3:15,3:19,可以用幾點幾分來回答',
+        '3:19,3:20,比方說',
+        '3:20,3:23,現在是上午十點十五分',
+        '3:23,3:24,或十點一刻',
+        '3:26,3:27,一刻是什麼呢',
+        '3:28,3:30,一刻就是十五分',
+        '3:30,3:32,所以一小時有四刻',
+        '3:34,3:37,五點半又是幾點分呢',
+        '3:37,3:40,半是半小時的意思',
+        '3:40,3:44,所以五點半是五點三十分',
+        '3:45,3:47,為了讓時間更清楚',
+        '3:47,3:50,我們可以加上上午或下午',
+        '3:51,3:54,對了您今天幾點鐘下班',
+        '3:54,3:57,我們可以一起去運動',
+        '3:57,3:59,你說錯了',
+        '3:59,4:03,應該說您今天幾點鐘下班呢',
+        '4:07,4:10,您今天幾點鐘下班呢',
+        '4:13,4:14,疑問的語氣',
+        '4:24,4:27,您今天幾點鐘下班呢',
+        '4:33,4:34,加強的語氣',
+        '4:35,4:38,外面正在下雨呢',
+        '4:43,4:45,我真的懂了呢'
+    ];
+
+    function set_record() {
+
+        let my_target = document.getElementById('list-item');
+        for (let item of record) {
+            let tokens = item.split(',');
+            let s = get_time_sec(tokens[0]);
+            let e = get_time_sec(tokens[1]);
+            let diff = (e - s) < 3 ? 3 : (e - s);
+            //console.log( '===> '+ +' '+get_time_sec(tokens[1])) ;
+            //console.log(tokens) ;
+
+            ///////////////
+            let content = '<div class="form-group"><div class="form-row" style="margin-bottom: 5px;"><div class="col-1">' +
+                '<button type="button" class="btn btn-outline-info btn-sm" onclick="seek(' + s + ',' + diff + ');">' +
+                '<i class="fas fa-play"></i></button></div><div class="col-11"> <label>' + get_mask_str(tokens[2]) +
+                '</label></div></div><div class="form-row"><div class="col-10"><input type="text" class="form-control"></div>' +
+                '<div class="col-2"><button type="button" data-ans="' + tokens[2].replace(/\s/g, '') + '" class="btn btn-danger" onclick="check_ans(this);" ><i class="fas fa-check-circle"></i></button></div></div></div>';
+
+            my_target.innerHTML += content;
+
+        }
+    }
+    function get_time_sec(str) {
+        let ts = str.split(':');
+        return parseInt(ts[0]) * 60 + parseInt(ts[1]);
+    }
+    function get_mask_str(str) {
+        if (str.length > 5) {
+            return str.substr(0, 2) + '...' + str.substr(str.length - 2, str.length);
+        } else {
+            return str.substr(0, 2) + '...';
+        }
+    }
+    function check_ans(ans) {
+        var answer = ans.getAttribute('data-ans');
+        var result = ans.parentElement.previousElementSibling.children[0].value;
+        result = result.replace(/\s/g, '');
+        if (answer == result) {
+            let par = ans.parentElement.parentElement.parentElement;
+            par.style.display = "none";
+        } else {
+            ans.innerHTML = '<i class="fas fa-times"></i>';
+        }
+    }
+    set_record();
+</script>
+
+</html>
